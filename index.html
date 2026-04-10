@@ -186,10 +186,10 @@
       width: 1px; background: var(--border);
     }
     .stat-num {
-      font-size: 2.4rem; font-weight: 900;
+      font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 900;
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; line-height: 1;
+      background-clip: text; line-height: 1.1;
     }
     .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.4rem; }
 
@@ -294,14 +294,14 @@
     }
     .result-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 1rem; }
     .result-stats { display: flex; gap: 1rem; }
-    .result-stat { flex: 1; text-align: center; padding: 0.7rem; background: var(--gold-dim); border-radius: 8px; }
+    .result-stat { flex: 1; text-align: center; padding: 0.6rem 0.4rem; background: var(--gold-dim); border-radius: 8px; min-width: 0; }
     .result-stat-num {
-      font-size: 1.3rem; font-weight: 900;
+      font-size: clamp(0.85rem, 2vw, 1.1rem); font-weight: 900;
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      line-height: 1;
+      line-height: 1.2; word-break: break-word;
     }
-    .result-stat-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem; }
+    .result-stat-label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.25rem; }
     .slider-nav { display: flex; justify-content: center; gap: 0.75rem; margin-top: 2rem; }
     .slider-btn {
       background: var(--bg2); border: 1px solid var(--border); color: var(--white);
@@ -613,20 +613,16 @@
     </div>
     <div class="hero-stats">
       <div class="stat">
-        <div class="stat-num">+50.618%</div>
-        <div class="stat-label">Umsatzwachstum Kunde #1</div>
+        <div class="stat-num">91.000 €</div>
+        <div class="stat-label">In 1 Monat skaliert</div>
       </div>
       <div class="stat">
         <div class="stat-num">398K €</div>
         <div class="stat-label">Revenue in 3 Monaten</div>
       </div>
       <div class="stat">
-        <div class="stat-num">1 Monat</div>
-        <div class="stat-label">Von 0 auf 91.000 €</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">4,49%</div>
-        <div class="stat-label">Conv. Rate erreicht</div>
+        <div class="stat-num">×500</div>
+        <div class="stat-label">Umsatzwachstum</div>
       </div>
     </div>
   </div>
@@ -708,12 +704,8 @@
           <div class="result-title">Von 179 € auf 91.141 € — in einem Monat.</div>
           <div class="result-stats">
             <div class="result-stat">
-              <div class="result-stat-num">+50.618%</div>
-              <div class="result-stat-label">Umsatz</div>
-            </div>
-            <div class="result-stat">
               <div class="result-stat-num">91.141 €</div>
-              <div class="result-stat-label">Juli Revenue</div>
+              <div class="result-stat-label">Revenue Juli</div>
             </div>
             <div class="result-stat">
               <div class="result-stat-num">1.719</div>
