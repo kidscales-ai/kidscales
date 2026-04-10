@@ -38,7 +38,36 @@
       text-decoration: none; transition: opacity 0.2s;
     }
     .nav-cta:hover { opacity: 0.85; }
-    @media (max-width: 768px) { .nav-links { display: none; } }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--gold); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-menu {
+      display: none; position: fixed;
+      top: 62px; left: 0; right: 0;
+      background: rgba(13,14,11,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 6%; z-index: 99; flex-direction: column;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--muted); text-decoration: none; font-size: 1rem;
+      padding: 1rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; color: var(--gold); }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+    }
 
     /* HERO */
     .cs-hero {
@@ -216,7 +245,20 @@
     <li><a href="index.html#contact">Kontakt</a></li>
   </ul>
   <a class="nav-cta" href="index.html#contact">Kostenloses Gespräch</a>
+  <button class="hamburger" id="hamburger" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#services" class="mobile-link">Leistungen</a>
+  <a href="index.html#results" class="mobile-link">Ergebnisse</a>
+  <a href="case-study-akt.html" class="mobile-link">Case Study</a>
+  <a href="index.html#testimonials" class="mobile-link">Kunden</a>
+  <a href="index.html#process" class="mobile-link">Ablauf</a>
+  <a href="index.html#contact" class="mobile-link">Kontakt</a>
+  <a href="index.html#contact" class="mobile-link">Kostenloses Gespräch →</a>
+</div>
 
 <!-- HERO -->
 <div class="cs-hero">
@@ -395,6 +437,16 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-link').forEach(l => {
+    l.addEventListener('click', () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); });
+  });
 </script>
 
 </body>
