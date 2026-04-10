@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kidscales — Performance Marketing</title>
+  <title>Kidscales — Paid Ads Agentur für E-Commerce</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -20,7 +20,6 @@
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       background: var(--bg);
@@ -29,79 +28,49 @@
       overflow-x: hidden;
     }
 
-    /* ── CANVAS BG ── */
+    /* ── CANVAS ── */
     #particle-canvas {
-      position: fixed;
-      top: 0; left: 0;
+      position: fixed; top: 0; left: 0;
       width: 100%; height: 100%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.5;
+      pointer-events: none; z-index: 0; opacity: 0.4;
     }
 
     /* ── NAV ── */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 1.1rem 6%;
-      background: rgba(13,14,11,0.8);
+      background: rgba(13,14,11,0.9);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
     }
-
     .nav-logo {
-      font-size: 1.35rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
+      font-size: 1.35rem; font-weight: 800; letter-spacing: 0.12em;
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-decoration: none;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; text-decoration: none;
     }
-
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.06em;
-      transition: color 0.2s;
+      color: var(--muted); text-decoration: none; font-size: 0.85rem;
+      letter-spacing: 0.06em; transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--gold); }
-
     .nav-cta {
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: #000;
-      border: none;
-      padding: 0.6rem 1.4rem;
-      border-radius: 4px;
-      font-weight: 700;
-      font-size: 0.82rem;
-      letter-spacing: 0.07em;
-      cursor: pointer;
-      text-decoration: none;
-      transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+      background: var(--gold); color: #000; border: none;
+      padding: 0.6rem 1.4rem; border-radius: 4px; font-weight: 700;
+      font-size: 0.82rem; letter-spacing: 0.07em; cursor: pointer;
+      text-decoration: none; transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
     }
     .nav-cta:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
+      opacity: 0.9; transform: translateY(-1px);
       box-shadow: 0 4px 20px rgba(197,241,53,0.35);
     }
 
     /* ── HAMBURGER ── */
     .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-      background: none;
-      border: none;
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
     }
     .hamburger span {
       display: block; width: 24px; height: 2px;
@@ -111,69 +80,45 @@
     .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
     .mobile-menu {
-      display: none;
-      position: fixed;
+      display: none; position: fixed;
       top: 62px; left: 0; right: 0;
       background: rgba(13,14,11,0.97);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
-      padding: 1.5rem 6%;
-      z-index: 99;
-      flex-direction: column;
+      padding: 1.5rem 6%; z-index: 99; flex-direction: column;
     }
     .mobile-menu.open { display: flex; }
     .mobile-menu a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 1rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-      transition: color 0.2s;
+      color: var(--muted); text-decoration: none; font-size: 1rem;
+      padding: 1rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s;
     }
     .mobile-menu a:last-child { border-bottom: none; color: var(--gold); }
 
     /* ── HERO ── */
     #hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 8rem 6% 4rem;
-      z-index: 1;
-      overflow: hidden;
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 8rem 6% 4rem;
+      z-index: 1; overflow: hidden;
     }
-
-    /* Orbs */
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      pointer-events: none;
-    }
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
     .orb-1 {
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(197,241,53,0.12) 0%, transparent 70%);
-      top: -15%; left: 50%;
-      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(197,241,53,0.08) 0%, transparent 70%);
+      top: -15%; left: 50%; transform: translateX(-50%);
       animation: float1 8s ease-in-out infinite;
     }
     .orb-2 {
       width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(197,241,53,0.06) 0%, transparent 70%);
-      bottom: 10%; right: 5%;
-      animation: float2 10s ease-in-out infinite;
+      background: radial-gradient(circle, rgba(197,241,53,0.05) 0%, transparent 70%);
+      bottom: 10%; right: 5%; animation: float2 10s ease-in-out infinite;
     }
     .orb-3 {
       width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(197,241,53,0.06) 0%, transparent 70%);
-      bottom: 20%; left: 5%;
-      animation: float2 12s ease-in-out infinite reverse;
+      background: radial-gradient(circle, rgba(197,241,53,0.05) 0%, transparent 70%);
+      bottom: 20%; left: 5%; animation: float2 12s ease-in-out infinite reverse;
     }
-
     @keyframes float1 {
       0%, 100% { transform: translateX(-50%) translateY(0); }
       50% { transform: translateX(-50%) translateY(-30px); }
@@ -182,650 +127,422 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
     }
-
-    .hero-inner { position: relative; z-index: 2; }
-
+    .hero-inner { position: relative; z-index: 2; max-width: 780px; }
     .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      border: 1px solid rgba(197,241,53,0.4);
-      color: var(--gold);
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      padding: 0.45rem 1.1rem;
-      border-radius: 100px;
-      margin-bottom: 2rem;
-      background: rgba(197,241,53,0.05);
-      backdrop-filter: blur(10px);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid rgba(197,241,53,0.4); color: var(--gold);
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.45rem 1.1rem; border-radius: 100px; margin-bottom: 2rem;
+      background: rgba(197,241,53,0.05); backdrop-filter: blur(10px);
     }
     .hero-tag::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      animation: pulse-dot 2s ease-in-out infinite;
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); animation: pulse-dot 2s ease-in-out infinite;
     }
     @keyframes pulse-dot {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.4; transform: scale(0.7); }
     }
-
     #hero h1 {
-      font-size: clamp(2.8rem, 8vw, 6rem);
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      line-height: 1.04;
-      margin-bottom: 1.5rem;
+      font-size: clamp(2.6rem, 7vw, 5.5rem);
+      font-weight: 900; letter-spacing: -0.03em;
+      line-height: 1.06; margin-bottom: 1.5rem;
     }
-
     .grad-text {
       background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, #f0ffd4 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
     #hero p {
-      max-width: 520px;
-      margin: 0 auto 2.5rem;
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.7;
+      max-width: 540px; margin: 0 auto 2.5rem;
+      color: var(--muted); font-size: 1.05rem; line-height: 1.7;
     }
-
     .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
     .btn-primary {
       position: relative;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: #000;
-      padding: 0.9rem 2rem;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      overflow: hidden;
+      background: var(--gold); color: #000;
+      padding: 0.95rem 2.2rem; border-radius: 6px;
+      font-weight: 800; font-size: 0.95rem; letter-spacing: 0.04em;
+      text-decoration: none; overflow: hidden;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .btn-primary::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(197,241,53,0.4); }
-    .btn-primary:hover::after { opacity: 1; }
-
     .btn-secondary {
-      border: 1px solid var(--border);
-      color: var(--white);
-      padding: 0.9rem 2rem;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      text-decoration: none;
-      backdrop-filter: blur(8px);
+      border: 1px solid var(--border); color: var(--white);
+      padding: 0.95rem 2.2rem; border-radius: 6px; font-size: 0.95rem;
+      text-decoration: none; backdrop-filter: blur(8px);
       background: rgba(255,255,255,0.03);
       transition: border-color 0.2s, background 0.2s, transform 0.2s;
     }
     .btn-secondary:hover {
-      border-color: var(--gold);
-      background: rgba(197,241,53,0.06);
-      transform: translateY(-2px);
+      border-color: var(--gold); background: rgba(197,241,53,0.06); transform: translateY(-2px);
     }
-
-    /* Stats */
     .hero-stats {
-      display: flex;
-      gap: 0;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 5rem;
-      padding-top: 3rem;
-      border-top: 1px solid var(--border);
+      display: flex; gap: 0; justify-content: center; flex-wrap: wrap;
+      margin-top: 4.5rem; padding-top: 3rem; border-top: 1px solid var(--border);
     }
-
-    .stat {
-      text-align: center;
-      padding: 0 2.5rem;
-      position: relative;
-    }
+    .stat { text-align: center; padding: 0 2.5rem; position: relative; }
     .stat:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      right: 0; top: 10%; bottom: 10%;
-      width: 1px;
-      background: var(--border);
+      content: ''; position: absolute; right: 0; top: 10%; bottom: 10%;
+      width: 1px; background: var(--border);
     }
-
     .stat-num {
-      font-size: 2.4rem;
-      font-weight: 900;
+      font-size: 2.4rem; font-weight: 900;
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1;
     }
-    .stat-label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-top: 0.4rem;
+    .stat-label { font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.4rem; }
+
+    /* ── TRUST BAR ── */
+    #trust-bar {
+      position: relative; z-index: 1;
+      padding: 2.5rem 6%; background: var(--bg2);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
     }
+    .trust-inner { max-width: 1000px; margin: 0 auto; text-align: center; }
+    .trust-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .trust-logos {
+      display: flex; align-items: center; justify-content: center;
+      gap: 2.5rem; flex-wrap: wrap;
+    }
+    .trust-logo {
+      opacity: 0.35; filter: grayscale(1);
+      font-size: 0.9rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--white);
+      transition: opacity 0.2s, filter 0.2s;
+    }
+    .trust-logo:hover { opacity: 0.7; filter: grayscale(0); }
 
     /* ── SHARED ── */
     section { padding: 6rem 6%; position: relative; z-index: 1; }
-    #why-wrap { padding: 6rem 6%; position: relative; z-index: 1; }
-
     .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.75rem;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.75rem;
     }
-    .section-label::before {
-      content: '';
-      width: 20px; height: 1px;
-      background: var(--gold);
-    }
-
+    .section-label::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
     .section-title {
-      font-size: clamp(1.9rem, 4vw, 2.9rem);
-      font-weight: 900;
-      line-height: 1.15;
-      margin-bottom: 1rem;
-      letter-spacing: -0.02em;
+      font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 900;
+      line-height: 1.15; margin-bottom: 1rem; letter-spacing: -0.02em;
     }
-
     .section-sub { color: var(--muted); max-width: 480px; margin-bottom: 3rem; font-size: 0.95rem; }
-
-    /* ── VIDEO ── */
-    #video-section {
-      padding: 5rem 6%;
-      position: relative;
-      z-index: 1;
-    }
-
-    .video-header {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto 3rem;
-    }
-
-    .video-wrapper {
-      max-width: 900px;
-      margin: 0 auto;
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(197,241,53,0.25);
-      box-shadow: 0 0 0 1px rgba(197,241,53,0.05),
-                  0 40px 100px rgba(0,0,0,0.6),
-                  0 0 60px rgba(197,241,53,0.06);
-      background: #000;
-    }
-
-    .video-wrapper::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 16px;
-      background: linear-gradient(135deg, rgba(197,241,53,0.04), transparent 50%);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    /* Top gold line */
-    .video-wrapper::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 10%; right: 10%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      z-index: 3;
-    }
-
-    #explainer-video {
-      width: 100%;
-      display: block;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-      border-radius: 16px;
-    }
-
-    /* Custom play overlay */
-    .video-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(2px);
-      cursor: pointer;
-      transition: background 0.3s;
-      z-index: 4;
-      border-radius: 16px;
-    }
-
-    .video-overlay.hidden { display: none; }
-
-    .video-overlay:hover { background: rgba(0,0,0,0.4); }
-
-    .play-btn {
-      width: 80px; height: 80px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.25s, box-shadow 0.25s;
-      margin-bottom: 1.2rem;
-    }
-
-    .video-overlay:hover .play-btn {
-      transform: scale(1.1);
-      box-shadow: 0 0 40px rgba(197,241,53,0.5);
-    }
-
-    .play-btn svg {
-      width: 28px; height: 28px;
-      fill: #000;
-      margin-left: 4px;
-    }
-
-    .play-label {
-      color: var(--white);
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .play-duration {
-      color: rgba(255,255,255,0.5);
-      font-size: 0.75rem;
-      margin-top: 0.3rem;
-      letter-spacing: 0.08em;
-    }
-
-    /* Placeholder when no video */
-    .video-placeholder {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #0e0e0e, #111);
-      gap: 1rem;
-    }
-
-    .placeholder-icon { font-size: 3rem; opacity: 0.3; }
-    .placeholder-text {
-      color: var(--muted);
-      font-size: 0.85rem;
-      text-align: center;
-      line-height: 1.6;
-    }
-    .placeholder-text strong { color: var(--gold); display: block; margin-bottom: 0.3rem; }
 
     /* ── SERVICES ── */
     #services { background: var(--bg2); }
-
     .services-header { max-width: 1100px; margin: 0 auto 3rem; }
-
     .services-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
     }
-
     .service-card {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem; position: relative; overflow: hidden;
       transition: border-color 0.3s, transform 0.25s, box-shadow 0.3s;
     }
-
     .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
+      opacity: 0; transition: opacity 0.3s;
     }
-
-    .service-card::after {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: radial-gradient(circle at center, rgba(197,241,53,0.04) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
     .service-card:hover {
-      border-color: rgba(197,241,53,0.4);
-      transform: translateY(-6px);
+      border-color: rgba(197,241,53,0.4); transform: translateY(-6px);
       box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(197,241,53,0.1);
     }
     .service-card:hover::before { opacity: 1; }
-    .service-card:hover::after { opacity: 1; }
-
     .service-icon-wrap {
-      width: 48px; height: 48px;
-      border-radius: 10px;
-      background: var(--gold-dim);
-      border: 1px solid rgba(197,241,53,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 1.2rem;
+      width: 48px; height: 48px; border-radius: 10px;
+      background: var(--gold-dim); border: 1px solid rgba(197,241,53,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.2rem;
     }
-
     .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
     .service-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
 
-    /* ── WHY ── */
-    .why-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
+    /* ── RESULTS SLIDER ── */
+    #results { background: var(--bg); }
+    .results-header { max-width: 1100px; margin: 0 auto 3rem; }
+    .slider-wrap { max-width: 1100px; margin: 0 auto; position: relative; }
+    .slider-track {
+      display: flex; gap: 1.5rem;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      scrollbar-width: none; padding-bottom: 1rem;
+      scroll-behavior: smooth;
     }
+    .slider-track::-webkit-scrollbar { display: none; }
+    .result-card {
+      flex: 0 0 340px; scroll-snap-align: start;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .result-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .result-img {
+      width: 100%; aspect-ratio: 16/9; object-fit: cover;
+      background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; color: var(--muted); text-align: center;
+      flex-direction: column; gap: 0.5rem; padding: 1rem;
+    }
+    .result-img-icon { font-size: 2rem; opacity: 0.3; }
+    .result-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .result-body { padding: 1.4rem; }
+    .result-tag {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .result-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 1rem; }
+    .result-stats { display: flex; gap: 1rem; }
+    .result-stat { flex: 1; text-align: center; padding: 0.7rem; background: var(--gold-dim); border-radius: 8px; }
+    .result-stat-num {
+      font-size: 1.3rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      line-height: 1;
+    }
+    .result-stat-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.25rem; }
+    .slider-nav { display: flex; justify-content: center; gap: 0.75rem; margin-top: 2rem; }
+    .slider-btn {
+      background: var(--bg2); border: 1px solid var(--border); color: var(--white);
+      width: 42px; height: 42px; border-radius: 50%; font-size: 1rem;
+      cursor: pointer; transition: background 0.2s, border-color 0.2s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .slider-btn:hover { background: var(--gold-dim); border-color: var(--gold); }
+    .upload-hint {
+      text-align: center; margin-top: 1.5rem; padding: 1rem;
+      background: var(--gold-dim); border: 1px dashed rgba(197,241,53,0.3);
+      border-radius: 10px; font-size: 0.82rem; color: var(--muted);
+    }
+    .upload-hint strong { color: var(--gold); }
 
+    /* ── WHY ── */
+    #why-wrap { padding: 6rem 6%; position: relative; z-index: 1; }
+    .why-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+    }
     .why-points { display: flex; flex-direction: column; gap: 1.8rem; margin-top: 2rem; }
-
     .why-point {
-      display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      padding: 1.2rem;
-      border-radius: 10px;
-      border: 1px solid transparent;
+      display: flex; gap: 1rem; align-items: flex-start; padding: 1.2rem;
+      border-radius: 10px; border: 1px solid transparent;
       transition: border-color 0.25s, background 0.25s;
     }
-    .why-point:hover {
-      border-color: var(--border);
-      background: rgba(197,241,53,0.03);
-    }
-
+    .why-point:hover { border-color: var(--border); background: rgba(197,241,53,0.03); }
     .why-icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      background: var(--gold-dim);
-      border: 1px solid rgba(197,241,53,0.2);
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--gold-dim); border: 1px solid rgba(197,241,53,0.2);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
+      font-size: 1rem; flex-shrink: 0;
     }
-
     .why-point h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
     .why-point p { color: var(--muted); font-size: 0.87rem; }
-
-    /* Metrics panel */
     .metrics-panel {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
-      position: relative;
-      overflow: hidden;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2rem; position: relative; overflow: hidden;
     }
-
     .metrics-panel::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
-
     .metrics-glow {
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 200px; height: 200px;
-      border-radius: 50%;
+      position: absolute; top: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
       background: radial-gradient(circle, rgba(197,241,53,0.08) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .panel-title {
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1.5rem; padding-bottom: 1rem;
       border-bottom: 1px solid var(--border);
     }
-
     .metric-item { margin-bottom: 1.4rem; }
     .metric-item:last-child { margin-bottom: 0; }
-
-    .metric-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-
+    .metric-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
     .metric-name { font-size: 0.85rem; color: var(--muted); }
-    .metric-value {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--gold);
-    }
-
-    .metric-bar {
-      height: 4px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 100px;
-      overflow: hidden;
-    }
-
+    .metric-value { font-size: 0.9rem; font-weight: 700; color: var(--gold); }
+    .metric-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 100px; overflow: hidden; }
     .metric-fill {
-      height: 100%;
-      border-radius: 100px;
+      height: 100%; border-radius: 100px;
       background: linear-gradient(90deg, var(--gold), var(--gold-light));
-      width: 0%;
-      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+      width: 0%; transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
     }
-
     .kpi-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+      margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border);
     }
-
     .kpi-box {
-      background: rgba(197,241,53,0.05);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem;
-      text-align: center;
+      background: rgba(197,241,53,0.05); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem; text-align: center;
     }
-
     .kpi-num {
-      font-size: 1.5rem;
-      font-weight: 900;
+      font-size: 1.5rem; font-weight: 900;
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      margin-bottom: 0.3rem;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1; margin-bottom: 0.3rem;
     }
-
     .kpi-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonials { background: var(--bg2); }
+    .testimonials-header { max-width: 1100px; margin: 0 auto 3rem; }
+    .testimonials-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;
+    }
+    .testimonial-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 14px; padding: 2rem; position: relative;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+    .testimonial-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 0.1em; }
+    .testimonial-result {
+      display: inline-block; background: var(--gold-dim);
+      border: 1px solid rgba(197,241,53,0.25); color: var(--gold);
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      padding: 0.3rem 0.8rem; border-radius: 100px; margin-bottom: 1rem;
+    }
+    .testimonial-text { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 0.85rem; }
+    .author-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--gold-dim); border: 2px solid rgba(197,241,53,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700; color: var(--gold); overflow: hidden;
+      flex-shrink: 0;
+    }
+    .author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .author-name { font-weight: 700; font-size: 0.9rem; }
+    .author-role { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── PROCESS ── */
+    #process { background: var(--bg); }
+    .process-inner { max-width: 800px; margin: 0 auto; }
+    .process-steps { display: flex; flex-direction: column; gap: 0; margin-top: 2.5rem; }
+    .process-step {
+      display: flex; gap: 1.5rem; align-items: flex-start;
+      padding: 1.8rem 0; position: relative;
+    }
+    .process-step:not(:last-child)::after {
+      content: ''; position: absolute;
+      left: 19px; top: 60px; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .step-num {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--gold-dim); border: 2px solid rgba(197,241,53,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 900; color: var(--gold);
+      flex-shrink: 0;
+    }
+    .step-content h4 { font-weight: 700; font-size: 1rem; margin-bottom: 0.35rem; }
+    .step-content p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+    .step-free-badge {
+      display: inline-block; background: var(--gold); color: #000;
+      font-size: 0.65rem; font-weight: 800; letter-spacing: 0.1em;
+      padding: 0.2rem 0.6rem; border-radius: 100px; margin-left: 0.6rem;
+      text-transform: uppercase; vertical-align: middle;
+    }
 
     /* ── CONTACT ── */
     #contact { background: var(--bg2); }
-
     .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
     .contact-inner .section-sub { margin: 0 auto 2.5rem; }
+    .contact-options {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;
+    }
+    .contact-option {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem; text-align: center;
+      text-decoration: none; color: var(--white);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .contact-option:hover {
+      border-color: var(--gold); transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(197,241,53,0.1);
+    }
+    .contact-option-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+    .contact-option-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.25rem; }
+    .contact-option-sub { font-size: 0.78rem; color: var(--muted); }
+    .contact-option.primary { background: var(--gold-dim); border-color: rgba(197,241,53,0.3); }
+    .contact-option.primary .contact-option-title { color: var(--gold); }
 
     form { display: flex; flex-direction: column; gap: 1rem; text-align: left; }
-
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-
     label {
-      font-size: 0.75rem;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.35rem;
-      display: block;
+      font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 0.35rem; display: block;
     }
-
     input, textarea, select {
-      width: 100%;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--white);
-      padding: 0.85rem 1rem;
-      font-size: 0.92rem;
-      font-family: inherit;
-      outline: none;
+      width: 100%; background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--white); padding: 0.85rem 1rem;
+      font-size: 0.92rem; font-family: inherit; outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     input:focus, textarea:focus, select:focus {
       border-color: rgba(197,241,53,0.6);
       box-shadow: 0 0 0 3px rgba(197,241,53,0.08);
     }
-    textarea { resize: vertical; min-height: 130px; }
+    textarea { resize: vertical; min-height: 120px; }
     select option { background: var(--bg3); }
-
     .form-submit {
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: #000;
-      border: none;
-      padding: 1rem;
-      border-radius: 8px;
-      font-weight: 800;
-      font-size: 0.95rem;
-      letter-spacing: 0.07em;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-      margin-top: 0.5rem;
+      background: var(--gold); color: #000; border: none;
+      padding: 1rem; border-radius: 8px; font-weight: 800;
+      font-size: 0.95rem; letter-spacing: 0.04em; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s; margin-top: 0.5rem;
     }
-    .form-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(197,241,53,0.4);
-    }
-
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(197,241,53,0.4); }
     .form-note { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 0.5rem; }
-
     #success-msg {
-      display: none;
-      background: rgba(197,241,53,0.06);
-      border: 1px solid rgba(197,241,53,0.3);
-      border-radius: 12px;
-      padding: 2rem;
-      text-align: center;
-      color: var(--gold);
-      font-weight: 600;
-      margin-top: 1rem;
+      display: none; background: rgba(197,241,53,0.06);
+      border: 1px solid rgba(197,241,53,0.3); border-radius: 12px;
+      padding: 2rem; text-align: center; color: var(--gold);
+      font-weight: 600; margin-top: 1rem;
     }
 
     /* ── FOOTER ── */
     footer {
-      padding: 2rem 6%;
-      border-top: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      position: relative;
-      z-index: 1;
+      padding: 2rem 6%; border-top: 1px solid var(--border);
+      position: relative; z-index: 1;
     }
-
     .footer-logo {
-      font-weight: 800;
-      letter-spacing: 0.1em;
+      font-weight: 800; letter-spacing: 0.1em;
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
     .footer-copy { color: var(--muted); font-size: 0.78rem; }
-
     .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 0.5rem;
     }
-
     .footer-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 2rem;
-      padding-top: 1.2rem;
-      margin-top: 1.2rem;
-      border-top: 1px solid var(--border);
+      display: flex; flex-wrap: wrap; gap: 0.5rem 2rem;
+      padding-top: 1.2rem; margin-top: 1.2rem; border-top: 1px solid var(--border);
     }
-
-    .footer-nav a {
-      color: var(--muted);
-      font-size: 0.85rem;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
+    .footer-nav a { color: var(--muted); font-size: 0.85rem; text-decoration: none; transition: color 0.2s; }
     .footer-nav a:hover { color: var(--gold); }
-
     .footer-disclaimer {
-      margin-top: 1.2rem;
-      padding-top: 1.2rem;
+      margin-top: 1.2rem; padding-top: 1.2rem;
       border-top: 1px solid rgba(197,241,53,0.08);
-      color: #444;
-      font-size: 0.72rem;
-      line-height: 1.6;
-      text-align: center;
+      color: #444; font-size: 0.72rem; line-height: 1.6; text-align: center;
     }
+
+    /* ── WHATSAPP BUTTON ── */
+    .whatsapp-btn {
+      position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 200;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #25D366; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 1.6rem;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .whatsapp-btn:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.6); }
 
     /* ── FADE IN ── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
+    .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .fade-in.visible { opacity: 1; transform: none; }
-
-    /* Stagger children */
-    .stagger > * {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
+    .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
     .stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.15s; }
     .stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.25s; }
@@ -846,17 +563,16 @@
       .stat { padding: 0 1.2rem; }
       .stat:not(:last-child)::after { display: none; }
       .stat-num { font-size: 1.8rem; }
-      .services-grid { grid-template-columns: 1fr; }
+      .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
       .why-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .form-row { grid-template-columns: 1fr; }
+      .form-row, .contact-options { grid-template-columns: 1fr; }
       footer { flex-direction: column; text-align: center; }
+      .footer-top { flex-direction: column; text-align: center; }
     }
-
     @media (max-width: 400px) {
       #hero h1 { font-size: 2.1rem; }
       .stat { padding: 0.5rem 1rem; }
       .hero-stats { flex-direction: column; align-items: center; gap: 1.2rem; }
-      .stat:not(:last-child)::after { display: none; }
     }
   </style>
 </head>
@@ -864,27 +580,34 @@
 
 <canvas id="particle-canvas"></canvas>
 
+<!-- WHATSAPP FLOATING BUTTON -->
+<a class="whatsapp-btn" href="https://wa.me/491XXXXXXXXX?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20kostenloses%20Erstgespr%C3%A4ch." target="_blank" rel="noopener" title="WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#hero">KIDSCALES</a>
   <ul class="nav-links">
-    <li><a href="#video-section">Video</a></li>
     <li><a href="#services">Leistungen</a></li>
-    <li><a href="#why">Warum wir</a></li>
+    <li><a href="#results">Ergebnisse</a></li>
+    <li><a href="#testimonials">Kunden</a></li>
+    <li><a href="#process">Ablauf</a></li>
     <li><a href="#contact">Kontakt</a></li>
   </ul>
-  <a class="nav-cta" href="#contact">Jetzt anfragen</a>
+  <a class="nav-cta" href="#contact">Kostenloses Gespräch</a>
   <button class="hamburger" id="hamburger" aria-label="Menü">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
 <div class="mobile-menu" id="mobile-menu">
-  <a href="#video-section" class="mobile-link">Video</a>
   <a href="#services" class="mobile-link">Leistungen</a>
-  <a href="#why" class="mobile-link">Warum wir</a>
+  <a href="#results" class="mobile-link">Ergebnisse</a>
+  <a href="#testimonials" class="mobile-link">Kunden</a>
+  <a href="#process" class="mobile-link">Ablauf</a>
   <a href="#contact" class="mobile-link">Kontakt</a>
-  <a href="#contact" class="mobile-link">Jetzt anfragen →</a>
+  <a href="#contact" class="mobile-link">Kostenloses Gespräch →</a>
 </div>
 
 <!-- HERO -->
@@ -892,94 +615,211 @@
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
-
   <div class="hero-inner">
-    <div class="hero-tag">Performance Marketing Agentur · D-A-CH</div>
-    <h1>Wir skalieren deine<br><span class="grad-text">Brand. Profitabel.</span></h1>
-    <p>Kidscales ist die Performance Marketing Agentur für deutsche Brands, die bereit sind zu wachsen — datengetrieben, ohne Kompromisse.</p>
+    <div class="hero-tag">Paid Ads Agentur · Meta · TikTok · Google</div>
+    <h1>Paid Ads die deinen<br><span class="grad-text">E-Commerce skalieren.</span></h1>
+    <p>Wir schalten profitabel Paid Ads auf Meta, TikTok und Google — und bringen E-Commerce Brands auf das nächste Umsatzniveau. Kein Setup-Chaos, keine leeren Versprechen.</p>
     <div class="hero-btns">
-      <a class="btn-primary" href="#contact">Kostenloses Erstgespräch</a>
-      <a class="btn-secondary" href="#services">Unsere Leistungen</a>
+      <a class="btn-primary" href="#contact">Kostenloses Erstgespräch →</a>
+      <a class="btn-secondary" href="#results">Unsere Ergebnisse</a>
     </div>
     <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">+287%</div>
+        <div class="stat-label">Ø ROAS-Steigerung</div>
+      </div>
       <div class="stat">
         <div class="stat-num">7-stellig</div>
         <div class="stat-label">Ad Spend verwaltet</div>
       </div>
       <div class="stat">
-        <div class="stat-num">3×</div>
-        <div class="stat-label">Durchschn. ROAS</div>
+        <div class="stat-num">–41%</div>
+        <div class="stat-label">Ø CPA-Reduktion</div>
       </div>
       <div class="stat">
-        <div class="stat-num">D-A-CH</div>
-        <div class="stat-label">Fokus-Markt</div>
+        <div class="stat-num">60 Tage</div>
+        <div class="stat-label">Bis erste Ergebnisse</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- VIDEO -->
-<section id="video-section">
-  <div class="video-header fade-in">
-    <div class="section-label">Erklärvideo</div>
-    <h2 class="section-title">So arbeiten wir.</h2>
-    <p class="section-sub" style="margin: 0 auto;">In 5 Minuten zeigen wir dir, wie Kidscales deutsche Brands profitabel skaliert — von der Strategie bis zum ersten ROAS-Sprung.</p>
-  </div>
-
-  <div class="video-wrapper fade-in">
-    <!-- Sobald du dein Video hast: lege video.mp4 in denselben Ordner wie index.html -->
-    <video id="explainer-video" preload="metadata" playsinline>
-      <source src="video.mp4" type="video/mp4" />
-    </video>
-
-    <!-- Overlay (wird ausgeblendet sobald Video lädt) -->
-    <div class="video-overlay" id="video-overlay">
-      <div class="play-btn">
-        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-      </div>
-      <div class="play-label">Video abspielen</div>
-      <div class="play-duration">ca. 5 Minuten</div>
+<!-- TRUST BAR -->
+<div id="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-label">Vertrauen von Brands, die wachsen wollen</div>
+    <div class="trust-logos">
+      <span class="trust-logo">Brand A</span>
+      <span class="trust-logo">Brand B</span>
+      <span class="trust-logo">Brand C</span>
+      <span class="trust-logo">Brand D</span>
+      <span class="trust-logo">Brand E</span>
     </div>
   </div>
-</section>
+</div>
 
 <!-- SERVICES -->
 <section id="services">
   <div class="services-header fade-in">
     <div class="section-label">Leistungen</div>
-    <h2 class="section-title">Was wir für dich liefern</h2>
-    <p class="section-sub">Von der Strategie bis zur täglichen Optimierung — wir übernehmen deinen kompletten Paid-Media-Kanal.</p>
+    <h2 class="section-title">Paid Ads. Komplett. Profitabel.</h2>
+    <p class="section-sub">Wir übernehmen deinen gesamten Paid-Media-Kanal — von der Strategie bis zur täglichen Optimierung.</p>
   </div>
   <div class="services-grid stagger">
     <div class="service-card">
-      <div class="service-icon-wrap">⚡</div>
-      <h3>Meta Ads</h3>
-      <p>Skalierbare Kampagnen für E-Commerce und Lead-Gen — von der Creative-Strategie bis zur täglichen Budget-Optimierung. Wir holen das Maximum aus jedem Euro raus.</p>
+      <div class="service-icon-wrap">📘</div>
+      <h3>Meta Ads (Facebook & Instagram)</h3>
+      <p>Skalierbare Kampagnen für E-Commerce — von Prospecting bis Retargeting. Wir optimieren täglich und holen den maximalen ROAS aus deinem Budget.</p>
     </div>
     <div class="service-card">
-      <div class="service-icon-wrap">🎯</div>
-      <h3>Google & YouTube Ads</h3>
-      <p>Search, Shopping und Performance Max — profitabel strukturiert, konsequent auf den deutschen Markt ausgerichtet und täglich optimiert.</p>
+      <div class="service-icon-wrap">🎵</div>
+      <h3>TikTok Ads</h3>
+      <p>TikTok ist der schnellste Wachstumskanal für E-Commerce Brands. Wir entwickeln Creative-Strategien, die auf der Plattform wirklich performen.</p>
     </div>
     <div class="service-card">
-      <div class="service-icon-wrap">📊</div>
-      <h3>Tracking & Analytics</h3>
-      <p>Sauberes Conversion-Tracking mit GA4, Meta Pixel und Server-Side-Events. Wir geben dir die Datenbasis, auf der echte Entscheidungen getroffen werden.</p>
-    </div>
-    <div class="service-card">
-      <div class="service-icon-wrap">🚀</div>
-      <h3>Strategie & Audit</h3>
-      <p>Wir analysieren wo dein Ad Account Geld verbrennt und liefern einen konkreten, umsetzbaren Aktionsplan — innerhalb von 48 Stunden.</p>
+      <div class="service-icon-wrap">🔍</div>
+      <h3>Google & Shopping Ads</h3>
+      <p>Search, Shopping und Performance Max — profitabel strukturiert, täglich optimiert. Wir sorgen dafür, dass du bei jedem relevanten Keyword vorne bist.</p>
     </div>
     <div class="service-card">
       <div class="service-icon-wrap">🎨</div>
       <h3>Creative-Strategie</h3>
-      <p>Wir entwickeln datengetriebene Creative-Briefings und zeigen dir präzise, welche Konzepte im D-A-CH-Markt wirklich konvertieren.</p>
+      <p>Wir analysieren was konvertiert und liefern datengetriebene Briefings für dein Creative-Team — damit jedes Ad testet, lernt und skaliert.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon-wrap">📊</div>
+      <h3>Tracking & Analytics</h3>
+      <p>Sauberes Conversion-Tracking mit GA4, Meta Pixel und Server-Side-Events. Keine Datenlücken mehr — echte Zahlen, echte Entscheidungen.</p>
     </div>
     <div class="service-card">
       <div class="service-icon-wrap">📈</div>
       <h3>Reporting & Transparenz</h3>
-      <p>Wöchentliche Reports, klare KPIs — du weißt zu jeder Zeit genau, was dein Budget bringt. Bei uns gibt es keine Blackbox.</p>
+      <p>Wöchentliche Reports, klare KPIs — du siehst zu jeder Zeit genau, was dein Budget bringt. Deine Accounts, deine Daten, immer.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS SLIDER -->
+<section id="results">
+  <div class="results-header fade-in">
+    <div class="section-label">Ergebnisse</div>
+    <h2 class="section-title">Echte Ergebnisse.<br><span class="grad-text">Kein Marketing-Blabla.</span></h2>
+    <p class="section-sub">Alle Zahlen stammen aus echten Shopify- und Ads-Manager-Dashboards unserer Kunden.</p>
+  </div>
+
+  <div class="slider-wrap">
+    <div class="slider-track" id="slider-track">
+
+      <div class="result-card">
+        <div class="result-img">
+          <!-- Ersetze durch: <img src="ergebnis-1.png" alt="Shopify Dashboard Kunde 1"> -->
+          <div class="result-img-icon">📸</div>
+          <span>Shopify Dashboard<br><strong style="color:var(--gold)">Bild hier hochladen</strong></span>
+        </div>
+        <div class="result-body">
+          <div class="result-tag">Fashion E-Commerce · Meta Ads</div>
+          <div class="result-title">Von 1.2× auf 4.8× ROAS in 45 Tagen</div>
+          <div class="result-stats">
+            <div class="result-stat">
+              <div class="result-stat-num">+287%</div>
+              <div class="result-stat-label">ROAS</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-stat-num">–38%</div>
+              <div class="result-stat-label">CPA</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-stat-num">45 Tage</div>
+              <div class="result-stat-label">Zeitraum</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-img">
+          <div class="result-img-icon">📸</div>
+          <span>Ads Manager Screenshot<br><strong style="color:var(--gold)">Bild hier hochladen</strong></span>
+        </div>
+        <div class="result-body">
+          <div class="result-tag">Beauty Brand · TikTok Ads</div>
+          <div class="result-title">6-stelliger Monatsumsatz durch TikTok</div>
+          <div class="result-stats">
+            <div class="result-stat">
+              <div class="result-stat-num">×3.4</div>
+              <div class="result-stat-label">ROAS</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-stat-num">+220%</div>
+              <div class="result-stat-label">Revenue</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-stat-num">60 Tage</div>
+              <div class="result-stat-label">Zeitraum</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-img">
+          <div class="result-img-icon">📸</div>
+          <span>Google Ads Dashboard<br><strong style="color:var(--gold)">Bild hier hochladen</strong></span>
+        </div>
+        <div class="result-body">
+          <div class="result-tag">Home & Living · Google Shopping</div>
+          <div class="result-title">CPA um 41% gesenkt bei gleichem Budget</div>
+          <div class="result-stats">
+            <div class="result-stat">
+              <div class="result-stat-num">–41%</div>
+              <div class="result-stat-label">CPA</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-stat-num">+180%</div>
+              <div class="result-stat-label">Conversions</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-stat-num">30 Tage</div>
+              <div class="result-stat-label">Zeitraum</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <div class="result-img">
+          <div class="result-img-icon">📸</div>
+          <span>Vorher / Nachher<br><strong style="color:var(--gold)">Bild hier hochladen</strong></span>
+        </div>
+        <div class="result-body">
+          <div class="result-tag">Sports Brand · Meta + TikTok</div>
+          <div class="result-title">Omnichannel Scale: 3× Umsatz in Q4</div>
+          <div class="result-stats">
+            <div class="result-stat">
+              <div class="result-stat-num">×3</div>
+              <div class="result-stat-label">Umsatz</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-stat-num">+95%</div>
+              <div class="result-stat-label">ROAS</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-stat-num">Q4</div>
+              <div class="result-stat-label">Peak Season</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="slider-nav">
+      <button class="slider-btn" id="slide-prev">←</button>
+      <button class="slider-btn" id="slide-next">→</button>
+    </div>
+
+    <div class="upload-hint fade-in">
+      <strong>💡 Deine echten Ergebnisse hier:</strong> Schick mir einfach Screenshots aus deinem Shopify-Dashboard oder Ads Manager — ich baue sie direkt ein.
     </div>
   </div>
 </section>
@@ -990,13 +830,13 @@
     <div class="fade-in">
       <div class="section-label">Warum Kidscales</div>
       <h2 class="section-title">Wir denken nicht<br>in Impressionen.<br><span class="grad-text">Wir denken in ROI.</span></h2>
-      <p class="section-sub">Kidscales ist keine klassische Agentur. Wir sind ein spezialisiertes Performance-Team — fokussiert auf einen Markt, eine Disziplin, ein Ziel: dein Wachstum.</p>
+      <p class="section-sub">Kidscales ist kein Fullservice-Bauchladen. Wir sind Paid-Ads-Spezialisten für E-Commerce — fokussiert, direkt, datengetrieben.</p>
       <div class="why-points">
         <div class="why-point">
-          <div class="why-icon">🇩🇪</div>
+          <div class="why-icon">🎯</div>
           <div>
-            <h4>100% D-A-CH-Fokus</h4>
-            <p>Wir kennen den deutschen Konsumenten, die lokalen Plattform-Algorithmen und was hier wirklich konvertiert.</p>
+            <h4>Spezialisiert auf E-Commerce</h4>
+            <p>Wir arbeiten ausschließlich mit E-Commerce Brands — kein B2B, kein Local, kein Brei. Das macht uns besser in dem, was du brauchst.</p>
           </div>
         </div>
         <div class="why-point">
@@ -1025,68 +865,167 @@
 
     <div class="metrics-panel fade-in">
       <div class="metrics-glow"></div>
-      <div class="panel-title">Live Performance Dashboard</div>
-
+      <div class="panel-title">Durchschnittliche Kunden-Performance</div>
       <div class="metric-item">
         <div class="metric-header">
           <span class="metric-name">ROAS Meta Ads</span>
-          <span class="metric-value">6.2×</span>
+          <span class="metric-value">4.8×</span>
         </div>
         <div class="metric-bar"><div class="metric-fill" data-width="85"></div></div>
       </div>
-
       <div class="metric-item">
         <div class="metric-header">
-          <span class="metric-name">CPA-Optimierung</span>
-          <span class="metric-value">–35%</span>
+          <span class="metric-name">TikTok Ads ROAS</span>
+          <span class="metric-value">3.4×</span>
         </div>
-        <div class="metric-bar"><div class="metric-fill" data-width="70"></div></div>
+        <div class="metric-bar"><div class="metric-fill" data-width="68"></div></div>
       </div>
-
       <div class="metric-item">
         <div class="metric-header">
-          <span class="metric-name">Google Ads ROAS</span>
-          <span class="metric-value">4.8×</span>
+          <span class="metric-name">CPA-Reduktion</span>
+          <span class="metric-value">–41%</span>
         </div>
-        <div class="metric-bar"><div class="metric-fill" data-width="78"></div></div>
+        <div class="metric-bar"><div class="metric-fill" data-width="75"></div></div>
       </div>
-
       <div class="metric-item">
         <div class="metric-header">
-          <span class="metric-name">CTR Steigerung</span>
-          <span class="metric-value">+120%</span>
+          <span class="metric-name">Revenue-Wachstum</span>
+          <span class="metric-value">+287%</span>
         </div>
         <div class="metric-bar"><div class="metric-fill" data-width="92"></div></div>
       </div>
-
       <div class="kpi-grid">
         <div class="kpi-box">
           <div class="kpi-num">48h</div>
-          <div class="kpi-label">Audit Turnaround</div>
+          <div class="kpi-label">Account-Audit</div>
         </div>
         <div class="kpi-box">
-          <div class="kpi-num">2×</div>
-          <div class="kpi-label">Scale in 60 Tagen</div>
+          <div class="kpi-num">60 T.</div>
+          <div class="kpi-label">Erste Ergebnisse</div>
         </div>
         <div class="kpi-box">
           <div class="kpi-num">100%</div>
-          <div class="kpi-label">Daten-Transparenz</div>
+          <div class="kpi-label">Datentransparenz</div>
         </div>
         <div class="kpi-box">
-          <div class="kpi-num">D-A-CH</div>
-          <div class="kpi-label">Markt-Fokus</div>
+          <div class="kpi-num">3 Kanäle</div>
+          <div class="kpi-label">Meta · TikTok · Google</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-header fade-in">
+    <div class="section-label">Kundenstimmen</div>
+    <h2 class="section-title">Was unsere Kunden sagen</h2>
+    <p class="section-sub">Echte Erfahrungen von E-Commerce Brands, die mit uns skaliert haben.</p>
+  </div>
+  <div class="testimonials-grid stagger">
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-result">+287% ROAS in 45 Tagen</div>
+      <p class="testimonial-text">„Wir haben vorher mit zwei anderen Agenturen schlechte Erfahrungen gemacht. Kidscales war anders — transparente Kommunikation, echte Zahlen, und der ROAS hat sich fast verdreifacht."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">M</div>
+        <div>
+          <div class="author-name">Max Richter</div>
+          <div class="author-role">CEO · Fashion Brand</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-result">6-stelliger Monatsumsatz via TikTok</div>
+      <p class="testimonial-text">„TikTok Ads waren für uns Neuland. Kidscales hat uns von Null auf profitabel gebracht — innerhalb von 60 Tagen hatten wir unseren ersten 6-stelligen Monat auf dem Kanal."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">S</div>
+        <div>
+          <div class="author-name">Sarah Müller</div>
+          <div class="author-role">Gründerin · Beauty Brand</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-result">CPA um 41% gesenkt</div>
+      <p class="testimonial-text">„Endlich eine Agentur, die in Zahlen denkt. Das Reporting ist transparent, die Kommunikation ist direkt. Unser Google-Budget läuft jetzt deutlich effizienter als vorher."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">T</div>
+        <div>
+          <div class="author-name">Thomas Bauer</div>
+          <div class="author-role">Marketing Lead · Home & Living</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-inner fade-in">
+    <div class="section-label">So läuft es ab</div>
+    <h2 class="section-title">Von 0 auf profitabel —<br><span class="grad-text">in 4 Schritten.</span></h2>
+    <p class="section-sub">Kein langer Onboarding-Marathon. Wir starten schnell und liefern früh erste Ergebnisse.</p>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>Kostenloses Erstgespräch <span class="step-free-badge">Gratis</span></h4>
+          <p>Wir lernen deine Brand kennen, analysieren deinen aktuellen Ad-Account und schauen ehrlich, ob und wie wir dir wirklich helfen können. Kein Verkaufsdruck, kein Bullshit — ein ehrliches Gespräch auf Augenhöhe.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>48h Account-Audit</h4>
+          <p>Innerhalb von 48 Stunden bekommst du eine detaillierte Analyse: wo Geld verbrannt wird, welche Kanäle Potenzial haben, und einen konkreten Aktionsplan für die nächsten 90 Tage.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Setup & Launch in 1 Woche</h4>
+          <p>Wir richten Tracking, Kampagnenstruktur und Creatives ein — und gehen live. Kein monatelanger Onboarding-Prozess, sondern schneller Start mit echter Wirkung.</p>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h4>Skalieren & Optimieren</h4>
+          <p>Tägliches Monitoring, wöchentliche Reports, monatliche Strategie-Calls. Wir testen, lernen und skalieren konsequent — bis dein ROAS-Ziel erreicht und übertroffen ist.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner fade-in">
-    <div class="section-label">Kontakt</div>
+    <div class="section-label">Jetzt starten</div>
     <h2 class="section-title">Bereit für echtes Wachstum?</h2>
-    <p class="section-sub">Füll das Formular aus — wir melden uns innerhalb von 24 Stunden für ein kostenloses Erstgespräch.</p>
+    <p class="section-sub">Das erste Gespräch ist kostenlos. Wir schauen gemeinsam, ob es passt — ohne Druck.</p>
+
+    <div class="contact-options">
+      <a class="contact-option primary" href="https://calendly.com/kidscales/erstgespraech" target="_blank" rel="noopener">
+        <div class="contact-option-icon">📅</div>
+        <div class="contact-option-title">Termin buchen</div>
+        <div class="contact-option-sub">Direkt via Calendly — in 30 Sek.</div>
+      </a>
+      <a class="contact-option" href="https://wa.me/491XXXXXXXXX?text=Hallo%2C%20ich%20interessiere%20mich%20f%C3%BCr%20ein%20kostenloses%20Erstgespr%C3%A4ch." target="_blank" rel="noopener">
+        <div class="contact-option-icon">💬</div>
+        <div class="contact-option-title">WhatsApp</div>
+        <div class="contact-option-sub">Direkte Antwort innerhalb von 2h</div>
+      </a>
+    </div>
 
     <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
       <input type="hidden" name="access_key" value="85906172-42d3-4aa2-8159-eaed3deaee4c" />
@@ -1112,20 +1051,20 @@
         <label for="budget">Monatliches Ad Budget</label>
         <select id="budget" name="budget">
           <option value="">Bitte wählen...</option>
-          <option>Unter 5.000 €</option>
-          <option>5.000 € – 15.000 €</option>
-          <option>15.000 € – 50.000 €</option>
-          <option>Über 50.000 €</option>
+          <option>Unter 3.000 €</option>
+          <option>3.000 € – 10.000 €</option>
+          <option>10.000 € – 30.000 €</option>
+          <option>Über 30.000 €</option>
         </select>
       </div>
       <div>
         <label for="message">Was willst du erreichen?</label>
-        <textarea id="message" name="message" placeholder="Erzähl mir kurz von deiner Brand und deinem Ziel..."></textarea>
+        <textarea id="message" name="message" placeholder="Erzähl mir kurz von deiner Brand, deinen aktuellen Kanälen und was du dir erhoffst..."></textarea>
       </div>
       <button type="submit" class="form-submit">Kostenloses Erstgespräch anfragen →</button>
       <p class="form-note">Kein Spam. Kein Verkaufsdruck. Ein ehrliches Gespräch auf Augenhöhe.</p>
     </form>
-    <div id="success-msg">Danke! Wir melden uns innerhalb von 24 Stunden bei dir.</div>
+    <div id="success-msg">✅ Danke! Wir melden uns innerhalb von 24 Stunden bei dir.</div>
   </div>
 </section>
 
@@ -1137,13 +1076,14 @@
   </div>
   <div class="footer-nav">
     <a href="#services">Leistungen</a>
+    <a href="#results">Ergebnisse</a>
+    <a href="#testimonials">Kunden</a>
     <a href="#contact">Termin vereinbaren</a>
-    <a href="#why">Warum wir</a>
     <a href="datenschutz.html">Datenschutz</a>
     <a href="impressum.html">Impressum</a>
   </div>
   <div class="footer-disclaimer">
-    © 2026 Kidscales Performance Marketing. Alle Rechte vorbehalten. | Diese Website steht in keiner Verbindung zu Meta Platforms Inc. oder Google LLC und wird von diesen nicht unterstützt. FACEBOOK und INSTAGRAM sind eingetragene Marken von Meta Platforms, Inc. GOOGLE und YOUTUBE sind eingetragene Marken von Google LLC. Alle auf dieser Website dargestellten Ergebnisse, Kennzahlen und Fallbeispiele basieren auf individuellen Kundenprojekten und stellen kein allgemeines Leistungsversprechen dar. Tatsächliche Ergebnisse können variieren. Maßgeblich für Leistungsumfang und Konditionen ist ausschließlich das individuelle Angebot.
+    © 2026 Kidscales Performance Marketing. Alle Rechte vorbehalten. | Diese Website steht in keiner Verbindung zu Meta Platforms Inc., TikTok Inc. oder Google LLC. FACEBOOK und INSTAGRAM sind eingetragene Marken von Meta Platforms, Inc. TIKTOK ist eine eingetragene Marke von ByteDance Ltd. GOOGLE und YOUTUBE sind eingetragene Marken von Google LLC. Alle auf dieser Website dargestellten Ergebnisse, Kennzahlen und Fallbeispiele basieren auf individuellen Kundenprojekten und stellen kein allgemeines Leistungsversprechen dar. Tatsächliche Ergebnisse können variieren.
   </div>
 </footer>
 
@@ -1153,10 +1093,7 @@
   const ctx = canvas.getContext('2d');
   let particles = [];
 
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   resize();
   window.addEventListener('resize', resize);
 
@@ -1172,39 +1109,30 @@
       this.pulse = Math.random() * Math.PI * 2;
     }
     update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      this.pulse += 0.01;
+      this.x += this.speedX; this.y += this.speedY; this.pulse += 0.01;
       if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
     }
     draw() {
       const o = this.opacity * (0.7 + 0.3 * Math.sin(this.pulse));
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(201, 168, 76, ${o})`;
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(197,241,53,${o})`; ctx.fill();
     }
   }
-
-  for (let i = 0; i < 100; i++) particles.push(new Particle());
+  for (let i = 0; i < 80; i++) particles.push(new Particle());
 
   function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => { p.update(); p.draw(); });
-
-    // Draw faint connections
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
           ctx.strokeStyle = `rgba(197,241,53,${0.04 * (1 - dist / 120)})`;
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
+          ctx.lineWidth = 0.5; ctx.stroke();
         }
       }
     }
@@ -1217,94 +1145,43 @@
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        // Trigger metric bars
-        e.target.querySelectorAll('.metric-fill').forEach(bar => {
-          bar.style.width = bar.dataset.width + '%';
-        });
+        e.target.querySelectorAll('.metric-fill').forEach(bar => { bar.style.width = bar.dataset.width + '%'; });
         io.unobserve(e.target);
       }
     });
   }, { threshold: 0.1 });
-
   document.querySelectorAll('.fade-in, .stagger').forEach(el => io.observe(el));
 
   /* ── HAMBURGER ── */
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open'); mobileMenu.classList.toggle('open');
   });
   document.querySelectorAll('.mobile-link').forEach(l => {
-    l.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    });
+    l.addEventListener('click', () => { hamburger.classList.remove('open'); mobileMenu.classList.remove('open'); });
   });
 
-  /* ── VIDEO PLAYER ── */
-  const video = document.getElementById('explainer-video');
-  const overlay = document.getElementById('video-overlay');
-
-  // Check if video source is accessible
-  video.addEventListener('error', () => {
-    // No video file yet — show placeholder
-    video.style.display = 'none';
-    const ph = document.createElement('div');
-    ph.className = 'video-placeholder';
-    ph.innerHTML = `
-      <div class="placeholder-icon">🎬</div>
-      <div class="placeholder-text">
-        <strong>Dein Video kommt hierher</strong>
-        Lege deine Videodatei als <code style="color:var(--gold)">video.mp4</code><br>
-        in denselben Ordner wie diese Datei.
-      </div>`;
-    video.parentNode.insertBefore(ph, video);
-    overlay.querySelector('.play-label').textContent = 'Video noch nicht hochgeladen';
-    overlay.querySelector('.play-duration').textContent = 'video.mp4 in den Ordner legen';
-  });
-
-  overlay.addEventListener('click', () => {
-    if (video.readyState === 0) return; // no source loaded
-    overlay.classList.add('hidden');
-    video.play();
-  });
-
-  video.addEventListener('pause', () => { overlay.classList.remove('hidden'); });
-  video.addEventListener('ended', () => { overlay.classList.remove('hidden'); });
+  /* ── SLIDER ── */
+  const track = document.getElementById('slider-track');
+  document.getElementById('slide-next').addEventListener('click', () => { track.scrollBy({ left: 360, behavior: 'smooth' }); });
+  document.getElementById('slide-prev').addEventListener('click', () => { track.scrollBy({ left: -360, behavior: 'smooth' }); });
 
   /* ── FORM ── */
   document.getElementById('contact-form').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    if (!name || !email) {
-      alert('Bitte Name und E-Mail ausfüllen.');
-      return;
-    }
     const btn = this.querySelector('.form-submit');
-    btn.textContent = 'Wird gesendet...';
-    btn.disabled = true;
-
-    const formData = new FormData(this);
+    btn.textContent = 'Wird gesendet...'; btn.disabled = true;
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        body: formData
-      });
-      const json = await res.json();
-      if (json.success) {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(this) });
+      const data = await res.json();
+      if (data.success) {
         this.style.display = 'none';
         document.getElementById('success-msg').style.display = 'block';
-      } else {
-        btn.textContent = 'Anfrage absenden →';
-        btn.disabled = false;
-        alert('Fehler beim Senden. Bitte versuche es erneut.');
-      }
-    } catch(err) {
-      btn.textContent = 'Anfrage absenden →';
+      } else { throw new Error(); }
+    } catch {
+      btn.textContent = 'Fehler – bitte nochmal versuchen';
       btn.disabled = false;
-      alert('Netzwerkfehler. Bitte versuche es erneut.');
     }
   });
 </script>
