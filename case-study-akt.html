@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study: Von 0 auf 400K € in 3 Monaten — Kidscales</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0D0E0B; --bg2: #111210; --bg3: #161714;
+      --gold: #C5F135; --gold-light: #D4F55A;
+      --gold-dim: rgba(197,241,53,0.12);
+      --white: #f0f0f0; --muted: #777; --border: rgba(197,241,53,0.15);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--white); line-height: 1.7; overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 6%; background: rgba(13,14,11,0.92);
+      backdrop-filter: blur(20px); border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 1.2rem; font-weight: 800; letter-spacing: 0.12em;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; text-decoration: none;
+    }
+    .nav-back {
+      color: var(--muted); text-decoration: none; font-size: 0.85rem;
+      transition: color 0.2s; display: flex; align-items: center; gap: 0.4rem;
+    }
+    .nav-back:hover { color: var(--gold); }
+
+    /* HERO */
+    .cs-hero {
+      padding: 10rem 6% 6rem; text-align: center; position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+    .cs-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      border: 1px solid rgba(197,241,53,0.4); color: var(--gold);
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 1.8rem;
+      background: rgba(197,241,53,0.05);
+    }
+    .cs-tag::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold);
+    }
+    .cs-hero h1 {
+      font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900;
+      letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1.2rem;
+    }
+    .grad-text {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .cs-hero p { max-width: 600px; margin: 0 auto 3rem; color: var(--muted); font-size: 1.05rem; }
+
+    .cs-hero-stats {
+      display: flex; justify-content: center; gap: 0; flex-wrap: wrap;
+      border-top: 1px solid var(--border); padding-top: 3rem; margin-top: 1rem;
+      max-width: 700px; margin: 0 auto;
+    }
+    .cs-stat { text-align: center; padding: 0 2.5rem; position: relative; }
+    .cs-stat:not(:last-child)::after {
+      content: ''; position: absolute; right: 0; top: 10%; bottom: 10%;
+      width: 1px; background: var(--border);
+    }
+    .cs-stat-num {
+      font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 900;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; line-height: 1;
+    }
+    .cs-stat-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.4rem; }
+
+    /* SECTIONS */
+    .cs-section { padding: 5rem 6%; max-width: 900px; margin: 0 auto; }
+    .cs-section-label {
+      font-size: 0.7rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.6rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .cs-section-label::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+    .cs-section h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 900; margin-bottom: 1.2rem; letter-spacing: -0.02em; }
+    .cs-section p { color: var(--muted); font-size: 0.97rem; line-height: 1.8; margin-bottom: 1rem; }
+    .cs-section p strong { color: var(--white); }
+
+    /* DIVIDER */
+    .cs-divider { border: none; border-top: 1px solid var(--border); margin: 0 6%; }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; }
+    .timeline-item {
+      display: flex; gap: 2rem; align-items: flex-start; padding: 2rem 0;
+      position: relative;
+    }
+    .timeline-item:not(:last-child)::after {
+      content: ''; position: absolute; left: 19px; top: 60px; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .timeline-dot {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: var(--gold-dim); border: 2px solid rgba(197,241,53,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 900; color: var(--gold);
+    }
+    .timeline-content h4 { font-weight: 800; font-size: 1rem; margin-bottom: 0.3rem; }
+    .timeline-content .timeline-date { font-size: 0.72rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
+    .timeline-content p { color: var(--muted); font-size: 0.88rem; margin-bottom: 0; }
+
+    /* APPROACH CARDS */
+    .approach-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.2rem; margin-top: 2rem;
+    }
+    .approach-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.6rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .approach-card:hover { border-color: rgba(197,241,53,0.35); transform: translateY(-3px); }
+    .approach-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: var(--gold-dim); border: 1px solid rgba(197,241,53,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; margin-bottom: 1rem;
+    }
+    .approach-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .approach-card p { color: var(--muted); font-size: 0.84rem; line-height: 1.6; }
+
+    /* RESULTS IMAGES */
+    .results-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem; margin-top: 2rem;
+    }
+    .result-img-card {
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+    }
+    .result-img-card img { width: 100%; display: block; object-fit: cover; }
+    .result-img-caption {
+      padding: 0.8rem 1rem; font-size: 0.78rem; color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    .result-img-caption strong { color: var(--gold); }
+
+    /* QUOTE */
+    .cs-quote {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 12px 12px 0; padding: 1.8rem 2rem;
+      margin: 2.5rem 0; position: relative;
+    }
+    .cs-quote p { color: var(--white); font-size: 1rem; font-style: italic; line-height: 1.7; margin: 0; }
+    .cs-quote-author { margin-top: 1rem; font-size: 0.8rem; color: var(--gold); font-style: normal; font-weight: 700; }
+
+    /* CTA */
+    .cs-cta {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 3.5rem; text-align: center; margin: 3rem 6%;
+    }
+    .cs-cta h2 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 900; margin-bottom: 0.8rem; }
+    .cs-cta p { color: var(--muted); margin-bottom: 2rem; font-size: 0.95rem; }
+    .btn-primary {
+      background: var(--gold); color: #000;
+      padding: 0.95rem 2.2rem; border-radius: 6px;
+      font-weight: 800; font-size: 0.95rem; letter-spacing: 0.04em;
+      text-decoration: none; display: inline-block;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(197,241,53,0.4); }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 6%; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-logo {
+      font-weight: 800; letter-spacing: 0.1em;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    footer a { color: var(--muted); font-size: 0.8rem; text-decoration: none; }
+    footer a:hover { color: var(--gold); }
+
+    /* FADE IN */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .cs-stat { padding: 0 1.2rem; }
+      .cs-stat:not(:last-child)::after { display: none; }
+      .cs-cta { padding: 2.5rem 1.5rem; margin: 2rem 5%; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">KIDSCALES</a>
+  <a class="nav-back" href="index.html">← Zurück zur Website</a>
+</nav>
+
+<!-- HERO -->
+<div class="cs-hero">
+  <div class="cs-tag">Case Study · E-Commerce · Paid Ads</div>
+  <h1>Von <span class="grad-text">0 auf 398.517 €</span><br>in 3 Monaten.</h1>
+  <p>Wie wir gemeinsam mit einer E-Commerce Brand durch gezielte Paid Ads, enge Creative-Zusammenarbeit und datengetriebene Strategie einen Umsatzdurchbruch erzielt haben.</p>
+
+  <div class="cs-hero-stats" style="padding-top:2rem; margin-top:2rem; border-top: 1px solid var(--border);">
+    <div class="cs-stat">
+      <div class="cs-stat-num">398.517 €</div>
+      <div class="cs-stat-label">Gesamtumsatz</div>
+    </div>
+    <div class="cs-stat">
+      <div class="cs-stat-num">91.141 €</div>
+      <div class="cs-stat-label">Im ersten Monat</div>
+    </div>
+    <div class="cs-stat">
+      <div class="cs-stat-num">7.615</div>
+      <div class="cs-stat-label">Bestellungen</div>
+    </div>
+  </div>
+</div>
+
+<!-- HINTERGRUND -->
+<div class="cs-section fade-in">
+  <div class="cs-section-label">Ausgangssituation</div>
+  <h2>Eine Brand mit Potenzial — aber ohne Reichweite.</h2>
+  <p>Als wir im <strong>Juni 2024</strong> mit dieser Brand starteten, lag der monatliche Gesamtumsatz bei knapp <strong>179 €</strong>. Das Produkt hatte klares Potenzial, aber es fehlte eine Strategie um die Zielgruppe profitabel zu erreichen.</p>
+  <p>Die Brand hatte weder eine skalierbare Ads-Struktur noch eine klare Creative-Strategie. Paid Ads wurden sporadisch und ohne Systematik geschaltet — mit entsprechend schlechten Ergebnissen.</p>
+  <p>Unser Auftrag: <strong>Von Grund auf aufbauen.</strong> Tracking, Struktur, Creative, Strategie — alles neu.</p>
+</div>
+
+<hr class="cs-divider">
+
+<!-- ANSATZ -->
+<div class="cs-section fade-in">
+  <div class="cs-section-label">Unser Ansatz</div>
+  <h2>Nicht nur Kampagnen schalten.<br>Gemeinsam wachsen.</h2>
+  <p>Was uns von klassischen Agenturen unterscheidet: Wir setzen nicht einfach Kampagnen auf und verschwinden. Wir arbeiten <strong>im engen Austausch</strong> mit der Brand — als verlängerter Arm des Teams.</p>
+
+  <div class="approach-grid">
+    <div class="approach-card">
+      <div class="approach-icon">🎯</div>
+      <h4>Creative Strategie</h4>
+      <p>Wir analysierten was in der Nische funktioniert, entwickelten datengetriebene Briefings und definierten den <strong>Winning Angle</strong> der Kampagne — bevor der erste Euro ausgegeben wurde.</p>
+    </div>
+    <div class="approach-card">
+      <div class="approach-icon">✍️</div>
+      <h4>Copywriting & Messaging</h4>
+      <p>Gemeinsam mit der Brand erarbeiteten wir Hooks, Headlines und Ad-Texte die direkt auf den Schmerzpunkt der Zielgruppe abzielen. Jedes Wort hat einen Zweck.</p>
+    </div>
+    <div class="approach-card">
+      <div class="approach-icon">📊</div>
+      <h4>Sauberes Tracking</h4>
+      <p>Bevor wir live gingen, richteten wir Meta Pixel, Server-Side Events und GA4 sauber ein. Keine Datenlücken, keine Blindflüge — jede Entscheidung basiert auf echten Zahlen.</p>
+    </div>
+    <div class="approach-card">
+      <div class="approach-icon">⚡</div>
+      <h4>Kampagnenstruktur</h4>
+      <p>Wir bauten eine skalierbare Struktur mit klaren Testing-, Scaling- und Retargeting-Phasen. Kein Raten — ein System das lernt und wächst.</p>
+    </div>
+    <div class="approach-card">
+      <div class="approach-icon">🔄</div>
+      <h4>Enger Austausch</h4>
+      <p>Wöchentliche Strategy-Calls, tägliches Monitoring, schnelle Feedback-Loops. Wir agieren nicht als externe Agentur sondern als Teil des Teams.</p>
+    </div>
+    <div class="approach-card">
+      <div class="approach-icon">📈</div>
+      <h4>Iteratives Scaling</h4>
+      <p>Was funktioniert wird skaliert. Was nicht funktioniert wird sofort gestoppt. Kein Budget verbrennen — konsequente Optimierung in Echtzeit.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="cs-divider">
+
+<!-- TIMELINE -->
+<div class="cs-section fade-in">
+  <div class="cs-section-label">Verlauf</div>
+  <h2>Monat für Monat.<br>Schritt für Schritt.</h2>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot">Jun</div>
+      <div class="timeline-content">
+        <div class="timeline-date">Juni 2024 — Start der Zusammenarbeit</div>
+        <h4>Aufbau & Grundlagen</h4>
+        <p>Tracking-Setup, Account-Audit, erste Kampagnenstruktur. Entwicklung des Winning Angles gemeinsam mit der Brand. Erste Tests mit kleinem Budget. Gesamtumsatz: 179 €.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">Jul</div>
+      <div class="timeline-content">
+        <div class="timeline-date">Juli 2024 — Der Durchbruch</div>
+        <h4>+50.618% Umsatzwachstum</h4>
+        <p>Der Winning Angle funktionierte. Wir skalierten gezielt in der High Season, optimierten täglich und verdreifachten das Budget auf die performantesten Creatives. <strong>91.141 € Umsatz, 1.719 Bestellungen, 4,49% Conversion Rate.</strong></p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot">Q3</div>
+      <div class="timeline-content">
+        <div class="timeline-date">Juli – September 2024 — Konsolidierung</div>
+        <h4>398.517 € Gesamtumsatz</h4>
+        <p>Über den gesamten Sommer hielten wir den Momentum aufrecht, testeten neue Creatives und optimierten kontinuierlich. <strong>7.615 Bestellungen, +221.668% Wachstum</strong> gegenüber dem Vorjahreszeitraum.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="cs-divider">
+
+<!-- ERGEBNISSE / SCREENSHOTS -->
+<div class="cs-section fade-in">
+  <div class="cs-section-label">Ergebnisse</div>
+  <h2>Echte Zahlen. Echte Dashboards.</h2>
+  <p>Keine Mock-ups, keine Hochglanz-Präsentationen. Diese Zahlen stammen direkt aus dem Shopify-Dashboard der Brand.</p>
+
+  <div class="results-grid">
+    <div class="result-img-card">
+      <img src="result-juli.png" alt="Shopify Dashboard Juli 2024">
+      <div class="result-img-caption"><strong>Juli 2024</strong> — 91.141 € · 1.719 Bestellungen · +50.618%</div>
+    </div>
+    <div class="result-img-card">
+      <img src="result-gesamt.png" alt="Shopify Dashboard Juli–September 2024">
+      <div class="result-img-caption"><strong>Juli–Sept 2024</strong> — 398.517 € · 7.615 Bestellungen · +221.668%</div>
+    </div>
+  </div>
+</div>
+
+<hr class="cs-divider">
+
+<!-- WAS DIESEN CASE BESONDERS MACHT -->
+<div class="cs-section fade-in">
+  <div class="cs-section-label">Key Takeaway</div>
+  <h2>Was diesen Case<br>besonders macht.</h2>
+  <p>Dieses Ergebnis war kein Zufall und kein einmaliger Spike. Es war das Resultat von <strong>systematischer Arbeit, engem Austausch und konsequenter Optimierung</strong>.</p>
+  <p>Was den Unterschied gemacht hat: Wir haben nicht einfach Anzeigen geschaltet. Wir haben <strong>gemeinsam mit der Brand</strong> die Message entwickelt, die Creative-Richtung definiert und jeden Tag auf die Zahlen reagiert.</p>
+  <p>Das ist das Kidscales-Modell: Nicht Agentur. <strong>Partner.</strong></p>
+
+  <div class="cs-quote">
+    <p>"Der Unterschied zu anderen Agenturen war, dass wir wirklich zusammengearbeitet haben — nicht nur Reports bekommen haben. Kidscales hat uns geholfen unsere Brand-Message zu schärfen, die richtigen Creatives zu entwickeln und das Budget dort einzusetzen wo es wirklich wirkt."</p>
+    <div class="cs-quote-author">— Kunde, E-Commerce Brand (AKT)</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cs-cta fade-in">
+  <h2>Dein Ergebnis<br><span class="grad-text">könnte hier stehen.</span></h2>
+  <p>Wir nehmen nur Brands an die wir wirklich skalieren können. Buch dir jetzt deinen kostenlosen Demo Call — wir schauen gemeinsam ob es passt.</p>
+  <a class="btn-primary" href="index.html#contact">Demo Call buchen →</a>
+</div>
+
+<footer>
+  <span class="footer-logo">KIDSCALES</span>
+  <div style="display:flex; gap:1.5rem;">
+    <a href="index.html">Startseite</a>
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
