@@ -654,7 +654,7 @@
 
     <!-- VSL Video -->
     <div class="hero-vsl">
-      <video id="vsl-video" preload="metadata" playsinline>
+      <video id="vsl-video" preload="none" playsinline controls>
         <source src="video.mp4" type="video/mp4" />
       </video>
       <div class="vsl-overlay" id="vsl-overlay">
@@ -1214,17 +1214,7 @@
   const vslVideo = document.getElementById('vsl-video');
   const vslOverlay = document.getElementById('vsl-overlay');
   if (vslVideo && vslOverlay) {
-    vslVideo.addEventListener('error', () => {
-      vslOverlay.innerHTML = `
-        <div style="text-align:center; padding:2rem;">
-          <div style="font-size:3rem; opacity:0.2; margin-bottom:1rem;">🎬</div>
-          <div style="color:var(--gold); font-weight:700; font-size:0.9rem; margin-bottom:0.3rem;">Dein VSL kommt hier rein</div>
-          <div style="color:var(--muted); font-size:0.75rem;">video.mp4 in den Ordner legen</div>
-        </div>`;
-      vslOverlay.style.cursor = 'default';
-    });
     vslOverlay.addEventListener('click', () => {
-      if (vslVideo.readyState === 0) return;
       vslOverlay.classList.add('hidden');
       vslVideo.play();
     });
