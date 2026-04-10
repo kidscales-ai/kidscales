@@ -99,7 +99,7 @@
     #hero {
       position: relative; min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
-      padding: 8rem 6% 4rem;
+      text-align: center; padding: 8rem 6% 4rem;
       z-index: 1; overflow: hidden;
     }
     .orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
@@ -128,27 +128,18 @@
       50% { transform: translateY(-20px); }
     }
     .hero-inner {
-      position: relative; z-index: 2; width: 100%; max-width: 1200px;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: center;
+      position: relative; z-index: 2; width: 100%; max-width: 860px;
     }
-    .hero-text { text-align: left; }
+    .hero-text { margin-bottom: 2.5rem; }
 
     /* ── VSL VIDEO ── */
     .hero-vsl {
-      position: relative; border-radius: 20px; overflow: hidden;
-      border: 1px solid rgba(197,241,53,0.2);
-      box-shadow: 0 0 0 1px rgba(197,241,53,0.05),
-                  0 40px 80px rgba(0,0,0,0.6),
-                  0 0 80px rgba(197,241,53,0.06);
-      background: #000; aspect-ratio: 9/16; max-height: 520px;
+      position: relative; border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(197,241,53,0.15);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 60px rgba(197,241,53,0.05);
+      background: #000; width: 100%;
     }
-    .hero-vsl video { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .hero-vsl::before {
-      content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
-      background: linear-gradient(135deg, rgba(197,241,53,0.04), transparent 60%);
-      border-radius: 20px;
-    }
+    .hero-vsl video { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
     .hero-vsl::after {
       content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent); z-index: 3;
@@ -156,34 +147,25 @@
     .vsl-overlay {
       position: absolute; inset: 0; z-index: 4;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.45); backdrop-filter: blur(2px);
-      cursor: pointer; transition: background 0.3s; border-radius: 20px;
+      background: rgba(0,0,0,0.5);
+      cursor: pointer; transition: background 0.3s;
     }
-    .vsl-overlay:hover { background: rgba(0,0,0,0.3); }
+    .vsl-overlay:hover { background: rgba(0,0,0,0.35); }
     .vsl-overlay.hidden { display: none; }
     .vsl-play-btn {
       width: 72px; height: 72px; border-radius: 50%;
       background: var(--gold);
       display: flex; align-items: center; justify-content: center;
-      transition: transform 0.25s, box-shadow 0.25s; margin-bottom: 1rem;
+      transition: transform 0.25s, box-shadow 0.25s;
     }
     .vsl-overlay:hover .vsl-play-btn {
       transform: scale(1.1); box-shadow: 0 0 40px rgba(197,241,53,0.5);
     }
     .vsl-play-btn svg { width: 26px; height: 26px; fill: #000; margin-left: 4px; }
-    .vsl-label { color: #fff; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
 
-    /* Floating stat badges */
-    .vsl-badge {
-      position: absolute; z-index: 5;
-      background: rgba(13,14,11,0.85); backdrop-filter: blur(12px);
-      border: 1px solid rgba(197,241,53,0.25); border-radius: 10px;
-      padding: 0.6rem 0.9rem; display: flex; align-items: center; gap: 0.5rem;
+    .hero-vsl-cta {
+      margin-top: 1.8rem; display: flex; justify-content: center;
     }
-    .vsl-badge-num { font-size: 0.95rem; font-weight: 900; color: var(--gold); }
-    .vsl-badge-label { font-size: 0.7rem; color: var(--muted); }
-    .vsl-badge.top-right { top: 1.2rem; right: -1.2rem; }
-    .vsl-badge.bottom-left { bottom: 1.2rem; left: -1.2rem; }
 
     .hero-tag {
       display: inline-flex; align-items: center; gap: 0.5rem;
@@ -210,10 +192,10 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
     #hero p {
-      max-width: 480px; margin: 0 0 2.5rem;
+      max-width: 600px; margin: 0 auto 2rem;
       color: var(--muted); font-size: 1.05rem; line-height: 1.7;
     }
-    .hero-btns { display: flex; gap: 1rem; justify-content: flex-start; flex-wrap: wrap; }
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
     .btn-primary {
       position: relative;
       background: var(--gold); color: #000;
@@ -234,8 +216,8 @@
       border-color: var(--gold); background: rgba(197,241,53,0.06); transform: translateY(-2px);
     }
     .hero-stats {
-      display: flex; gap: 0; justify-content: flex-start; flex-wrap: wrap;
-      margin-top: 4.5rem; padding-top: 3rem; border-top: 1px solid var(--border);
+      display: flex; gap: 0; justify-content: center; flex-wrap: wrap;
+      margin-top: 3rem; padding-top: 2.5rem; border-top: 1px solid var(--border);
     }
     .stat { text-align: center; padding: 0 2.5rem; position: relative; }
     .stat:not(:last-child)::after {
@@ -606,15 +588,10 @@
       section { padding: 4rem 5%; }
       #why-wrap { padding: 4rem 5%; }
       #hero { padding: 6.5rem 5% 3rem; min-height: auto; }
-      .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-      .hero-text { text-align: center; }
-      #hero p { margin: 0 auto 2.5rem; }
-      .hero-btns { flex-direction: column; align-items: center; justify-content: center; }
-      .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+      .hero-inner { max-width: 100%; }
+      .btn-primary { width: 100%; text-align: center; }
       .hero-stats { justify-content: center; }
-      .hero-vsl { max-height: 380px; }
-      .vsl-badge.top-right { right: 0.5rem; top: 0.5rem; }
-      .vsl-badge.bottom-left { left: 0.5rem; bottom: 0.5rem; }
+      #hero p { margin: 0 auto 2rem; }
       .hero-stats { margin-top: 3rem; padding-top: 2rem; }
       .stat { padding: 0 1.2rem; }
       .stat:not(:last-child)::after { display: none; }
@@ -668,56 +645,43 @@
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
   <div class="hero-inner">
-    <!-- LEFT: Text -->
+    <!-- Headline -->
     <div class="hero-text">
       <div class="hero-tag">Paid Ads Agentur · Meta · TikTok · Google</div>
       <h1>Paid Ads die deinen<br><span class="grad-text">E-Commerce skalieren.</span></h1>
-      <p>Wir schalten profitabel Paid Ads auf Meta, TikTok und Google — und bringen E-Commerce Brands auf das nächste Umsatzniveau. Kein Setup-Chaos, keine leeren Versprechen.</p>
-      <div class="hero-btns">
-        <a class="btn-primary" href="#contact">Kostenloses Erstgespräch →</a>
-        <a class="btn-secondary" href="#results">Unsere Ergebnisse</a>
-      </div>
-      <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-num counter" data-target="1000000" data-suffix="+€" data-prefix="">0</div>
-          <div class="stat-label">Ad Spend verwaltet</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num counter" data-target="10000000" data-suffix="+€" data-prefix="">0</div>
-          <div class="stat-label">Revenue generiert</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num counter" data-target="2672" data-suffix="%" data-prefix="+">0</div>
-          <div class="stat-label">Wachstum in 5 Tagen</div>
+      <p>Wir schalten profitabel Paid Ads auf Meta, TikTok und Google — und bringen E-Commerce Brands auf das nächste Umsatzniveau.</p>
+    </div>
+
+    <!-- VSL Video -->
+    <div class="hero-vsl">
+      <video id="vsl-video" preload="metadata" playsinline>
+        <source src="video.mp4" type="video/mp4" />
+      </video>
+      <div class="vsl-overlay" id="vsl-overlay">
+        <div class="vsl-play-btn">
+          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
         </div>
       </div>
     </div>
 
-    <!-- RIGHT: VSL Video -->
-    <div style="position:relative;">
-      <div class="hero-vsl">
-        <video id="vsl-video" preload="metadata" playsinline>
-          <source src="video.mp4" type="video/mp4" />
-        </video>
-        <div class="vsl-overlay" id="vsl-overlay">
-          <div class="vsl-play-btn">
-            <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-          </div>
-          <div class="vsl-label">Jetzt ansehen</div>
-        </div>
+    <!-- CTA unter Video -->
+    <div class="hero-vsl-cta">
+      <a class="btn-primary" href="#contact">Kostenloses Erstgespräch →</a>
+    </div>
+
+    <!-- Stats -->
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num counter" data-target="1000000" data-suffix="+€" data-prefix="">0</div>
+        <div class="stat-label">Ad Spend verwaltet</div>
       </div>
-      <!-- Floating badges -->
-      <div class="vsl-badge top-right">
-        <div>
-          <div class="vsl-badge-num">+2.672%</div>
-          <div class="vsl-badge-label">Umsatzwachstum</div>
-        </div>
+      <div class="stat">
+        <div class="stat-num counter" data-target="10000000" data-suffix="+€" data-prefix="">0</div>
+        <div class="stat-label">Revenue generiert</div>
       </div>
-      <div class="vsl-badge bottom-left">
-        <div>
-          <div class="vsl-badge-num">91.141€</div>
-          <div class="vsl-badge-label">In 1 Monat</div>
-        </div>
+      <div class="stat">
+        <div class="stat-num counter" data-target="2672" data-suffix="%" data-prefix="+">0</div>
+        <div class="stat-label">Wachstum in 5 Tagen</div>
       </div>
     </div>
   </div>
