@@ -1014,62 +1014,19 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner fade-in">
+<section id="contact" style="padding: 6rem 6%; position: relative; z-index: 1;">
+  <div class="fade-in" style="text-align: center; margin-bottom: 3rem;">
     <div class="section-label">Jetzt starten</div>
     <h2 class="section-title">Bereit für echtes Wachstum?</h2>
     <p class="section-sub">Das erste Gespräch ist kostenlos. Wir schauen gemeinsam, ob es passt — ohne Druck.</p>
+  </div>
 
-    <div style="margin-bottom:2rem;">
-      <a class="contact-option primary" href="https://calendly.com/kidscales/erstgespraech" target="_blank" rel="noopener" style="display:block; text-decoration:none;">
-        <div class="contact-option-icon">📅</div>
-        <div class="contact-option-title">Termin buchen</div>
-        <div class="contact-option-sub">Direkt via Calendly — in 30 Sek.</div>
-      </a>
+  <!-- Calendly Inline Widget -->
+  <div class="fade-in" style="max-width: 900px; margin: 0 auto; border-radius: 16px; overflow: hidden; border: 1px solid var(--border);">
+    <div class="calendly-inline-widget"
+      data-url="https://calendly.com/khidir/15min?hide_gdpr_banner=1&background_color=111210&text_color=f0f0f0&primary_color=C5F135"
+      style="min-width:320px; height:700px;">
     </div>
-
-    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
-      <input type="hidden" name="access_key" value="85906172-42d3-4aa2-8159-eaed3deaee4c" />
-      <input type="hidden" name="subject" value="Neue Anfrage über Kidscales" />
-      <input type="hidden" name="from_name" value="Kidscales Website" />
-      <input type="hidden" name="redirect" value="false" />
-      <input type="checkbox" name="botcheck" style="display:none" />
-      <div class="form-row">
-        <div>
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Max Mustermann" />
-          <div class="field-error" id="name-error">Bitte gib deinen Namen ein.</div>
-        </div>
-        <div>
-          <label for="email">E-Mail</label>
-          <input type="email" id="email" name="email" placeholder="max@brand.de" />
-          <div class="field-error" id="email-error">Bitte gib eine gültige E-Mail ein.</div>
-        </div>
-      </div>
-      <div>
-        <label for="brand">Deine Brand / Website</label>
-        <input type="text" id="brand" name="brand" placeholder="brand.de" />
-      </div>
-      <div>
-        <label for="budget">Monatliches Ad Budget</label>
-        <select id="budget" name="budget">
-          <option value="">Bitte wählen...</option>
-          <option>Unter 3.000 €</option>
-          <option>3.000 € – 10.000 €</option>
-          <option>10.000 € – 30.000 €</option>
-          <option>Über 30.000 €</option>
-        </select>
-        <div class="field-error" id="budget-error">Bitte wähle dein monatliches Budget.</div>
-      </div>
-      <div>
-        <label for="message">Was willst du erreichen?</label>
-        <textarea id="message" name="message" placeholder="Erzähl mir kurz von deiner Brand, deinen aktuellen Kanälen und was du dir erhoffst..."></textarea>
-        <div class="field-error" id="message-error">Bitte schreib kurz was du erreichen möchtest.</div>
-      </div>
-      <button type="submit" class="form-submit">Demo Call buchen anfragen →</button>
-      <p class="form-note">Kein Spam. Kein Verkaufsdruck. Ein ehrliches Gespräch auf Augenhöhe.</p>
-    </form>
-    <div id="success-msg">✅ Danke! Wir melden uns innerhalb von 24 Stunden bei dir.</div>
   </div>
 </section>
 
@@ -1251,5 +1208,6 @@
     }
   });
 </script>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </body>
 </html>
