@@ -4,9 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kidscales — Paid Ads Agentur für E-Commerce</title>
-  <script src="https://fast.wistia.com/player.js" async></script>
-  <script src="https://fast.wistia.com/embed/hd8c56diff.js" async type="module"></script>
-  <style>wistia-player[media-id='hd8c56diff']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/hd8c56diff/swatch'); display: block; filter: blur(5px); padding-top:177.78%; }</style>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -141,8 +138,20 @@
       border: 1px solid rgba(197,241,53,0.15);
       box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 60px rgba(197,241,53,0.05);
       width: 100%; max-width: 700px; margin: 0 auto;
+      aspect-ratio: 1/1; background: var(--bg2);
     }
-    .hero-vsl wistia-player { display: block; width: 100%; }
+    .vsl-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1rem;
+    }
+    .vsl-placeholder-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--gold-dim); border: 1px solid rgba(197,241,53,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; color: var(--gold);
+    }
+    .vsl-placeholder-text { color: var(--muted); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; }
 
     .hero-vsl-cta {
       margin-top: 1.8rem; display: flex; justify-content: center;
@@ -633,9 +642,12 @@
       <p>Wir schalten profitabel Paid Ads auf Meta, TikTok und Google — und bringen E-Commerce Brands auf das nächste Umsatzniveau.</p>
     </div>
 
-    <!-- VSL Video -->
+    <!-- VSL Placeholder -->
     <div class="hero-vsl">
-      <wistia-player media-id="hd8c56diff" aspect="0.5625"></wistia-player>
+      <div class="vsl-placeholder">
+        <div class="vsl-placeholder-icon">▶</div>
+        <div class="vsl-placeholder-text">Dein VSL Video</div>
+      </div>
     </div>
 
     <!-- CTA unter Video -->
