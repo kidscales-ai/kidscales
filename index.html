@@ -1135,27 +1135,20 @@
       ctx.fillStyle = `rgba(197,241,53,${o})`; ctx.fill();
     }
   }
-  for (let i = 0; i < 80; i++) particles.push(new Particle());
+  const isMobile = window.innerWidth < 768;
+  const particleCount = isMobile ? 0 : 40;
+  for (let i = 0; i < particleCount; i++) particles.push(new Particle());
 
-  function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(197,241,53,${0.04 * (1 - dist / 120)})`;
-          ctx.lineWidth = 0.5; ctx.stroke();
-        }
-      }
+  if (isMobile) {
+    canvas.style.display = 'none';
+  } else {
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateParticles);
     }
-    requestAnimationFrame(animateParticles);
+    animateParticles();
   }
-  animateParticles();
 
   /* ── INTERSECTION OBSERVER ── */
   const io = new IntersectionObserver((entries) => {
