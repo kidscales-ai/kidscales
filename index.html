@@ -613,15 +613,15 @@
     </div>
     <div class="hero-stats">
       <div class="stat">
-        <div class="stat-num">7-stellig</div>
+        <div class="stat-num counter" data-target="1000000" data-suffix="+€" data-prefix="">0</div>
         <div class="stat-label">Ad Spend verwaltet</div>
       </div>
       <div class="stat">
-        <div class="stat-num">Mio. €</div>
-        <div class="stat-label">Umsatz für Kunden generiert</div>
+        <div class="stat-num counter" data-target="10000000" data-suffix="+€" data-prefix="">0</div>
+        <div class="stat-label">Revenue für Kunden generiert</div>
       </div>
       <div class="stat">
-        <div class="stat-num">+2.672%</div>
+        <div class="stat-num counter" data-target="2672" data-suffix="%" data-prefix="+">0</div>
         <div class="stat-label">Wachstum in 5 Tagen</div>
       </div>
     </div>
@@ -1038,6 +1038,40 @@
 </footer>
 
 <script>
+  /* ── COUNTER ANIMATION ── */
+  function formatNum(n) {
+    return Math.floor(n).toLocaleString('de-DE');
+  }
+
+  function animateCounter(el) {
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const prefix = el.dataset.prefix || '';
+    const duration = 2000;
+    const start = performance.now();
+
+    function update(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = ease * target;
+      el.textContent = prefix + formatNum(current) + suffix;
+      if (progress < 1) requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCounter(e.target);
+        counterObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
   /* ── PARTICLE CANVAS ── */
   const canvas = document.getElementById('particle-canvas');
   const ctx = canvas.getContext('2d');
