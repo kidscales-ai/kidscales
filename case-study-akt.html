@@ -119,25 +119,20 @@
     .timeline-content .timeline-date { font-size: 0.72rem; color: var(--gold); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.5rem; }
     .timeline-content p { color: var(--muted); font-size: 0.88rem; margin-bottom: 0; }
 
-    /* APPROACH CARDS */
-    .approach-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.2rem; margin-top: 2rem;
+    /* APPROACH LIST */
+    .approach-list { display: flex; flex-direction: column; gap: 0; margin-top: 2rem; }
+    .approach-item {
+      display: grid; grid-template-columns: 2.5rem 1fr;
+      gap: 1.2rem; padding: 1.6rem 0;
+      border-bottom: 1px solid var(--border);
     }
-    .approach-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 12px; padding: 1.6rem;
-      transition: border-color 0.2s, transform 0.2s;
+    .approach-item:last-child { border-bottom: none; }
+    .approach-num {
+      font-size: 0.72rem; font-weight: 900; color: var(--gold);
+      letter-spacing: 0.05em; padding-top: 0.3rem;
     }
-    .approach-card:hover { border-color: rgba(197,241,53,0.35); transform: translateY(-3px); }
-    .approach-icon {
-      width: 40px; height: 40px; border-radius: 8px;
-      background: var(--gold-dim); border: 1px solid rgba(197,241,53,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; margin-bottom: 1rem;
-    }
-    .approach-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .approach-card p { color: var(--muted); font-size: 0.84rem; line-height: 1.6; }
+    .approach-body h4 { font-size: 1rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--white); }
+    .approach-body p { color: var(--muted); font-size: 0.88rem; line-height: 1.75; margin: 0; }
 
     /* RESULTS IMAGES */
     .results-grid {
@@ -262,36 +257,48 @@
   <h2>Nicht nur Kampagnen schalten.<br>Gemeinsam wachsen.</h2>
   <p>Was uns von klassischen Agenturen unterscheidet: Wir setzen nicht einfach Kampagnen auf und verschwinden. Wir arbeiten <strong>im engen Austausch</strong> mit der Brand — als verlängerter Arm des Teams.</p>
 
-  <div class="approach-grid">
-    <div class="approach-card">
-      <div class="approach-icon">🎯</div>
-      <h4>Creative Strategie</h4>
-      <p>Wir analysierten was in der Nische funktioniert, entwickelten datengetriebene Briefings und definierten den <strong>Winning Angle</strong> der Kampagne — bevor der erste Euro ausgegeben wurde.</p>
+  <div class="approach-list">
+    <div class="approach-item">
+      <div class="approach-num">01</div>
+      <div class="approach-body">
+        <h4>Creative Strategie</h4>
+        <p>Bevor der erste Euro ausgegeben wurde, haben wir die Nische analysiert, Wettbewerber durchleuchtet und einen klaren <strong style="color:var(--white)">Winning Angle</strong> definiert. Datengetriebene Briefings statt Bauchgefühl — jedes Creative hatte eine Hypothese, die getestet werden sollte.</p>
+      </div>
     </div>
-    <div class="approach-card">
-      <div class="approach-icon">✍️</div>
-      <h4>Copywriting & Messaging</h4>
-      <p>Gemeinsam mit der Brand erarbeiteten wir Hooks, Headlines und Ad-Texte die direkt auf den Schmerzpunkt der Zielgruppe abzielen. Jedes Wort hat einen Zweck.</p>
+    <div class="approach-item">
+      <div class="approach-num">02</div>
+      <div class="approach-body">
+        <h4>Copywriting & Messaging</h4>
+        <p>Gemeinsam mit der Brand entwickelten wir Hooks, Headlines und Ad-Texte die direkt auf den Schmerzpunkt der Zielgruppe abzielen. Kein generisches Marketing — jedes Wort war auf Conversion ausgelegt.</p>
+      </div>
     </div>
-    <div class="approach-card">
-      <div class="approach-icon">📊</div>
-      <h4>Sauberes Tracking</h4>
-      <p>Bevor wir live gingen, richteten wir Meta Pixel, Server-Side Events und GA4 sauber ein. Keine Datenlücken, keine Blindflüge — jede Entscheidung basiert auf echten Zahlen.</p>
+    <div class="approach-item">
+      <div class="approach-num">03</div>
+      <div class="approach-body">
+        <h4>Sauberes Tracking-Setup</h4>
+        <p>Meta Pixel, Server-Side Events via Conversions API und GA4 wurden von Grund auf sauber eingerichtet. Keine Datenlücken, keine Blindflüge — jede Optimierungsentscheidung basierte auf verlässlichen, echten Zahlen.</p>
+      </div>
     </div>
-    <div class="approach-card">
-      <div class="approach-icon">⚡</div>
-      <h4>Kampagnenstruktur</h4>
-      <p>Wir bauten eine skalierbare Struktur mit klaren Testing-, Scaling- und Retargeting-Phasen. Kein Raten — ein System das lernt und wächst.</p>
+    <div class="approach-item">
+      <div class="approach-num">04</div>
+      <div class="approach-body">
+        <h4>Skalierbare Kampagnenstruktur</h4>
+        <p>Wir bauten eine klare Struktur mit getrennten Testing-, Scaling- und Retargeting-Phasen. Kein willkürliches Schalten — ein System das aus Daten lernt, profitable Ads isoliert und systematisch hochskaliert.</p>
+      </div>
     </div>
-    <div class="approach-card">
-      <div class="approach-icon">🔄</div>
-      <h4>Enger Austausch</h4>
-      <p>Wöchentliche Strategy-Calls, tägliches Monitoring, schnelle Feedback-Loops. Wir agieren nicht als externe Agentur sondern als Teil des Teams.</p>
+    <div class="approach-item">
+      <div class="approach-num">05</div>
+      <div class="approach-body">
+        <h4>Enger Austausch mit der Brand</h4>
+        <p>Wöchentliche Strategy-Calls, tägliches Performance-Monitoring und kurze Feedback-Loops. Wir agierten nicht als externe Agentur im Hintergrund — sondern als verlängerter Arm des Teams mit vollem Commitment.</p>
+      </div>
     </div>
-    <div class="approach-card">
-      <div class="approach-icon">📈</div>
-      <h4>Iteratives Scaling</h4>
-      <p>Was funktioniert wird skaliert. Was nicht funktioniert wird sofort gestoppt. Kein Budget verbrennen — konsequente Optimierung in Echtzeit.</p>
+    <div class="approach-item">
+      <div class="approach-num">06</div>
+      <div class="approach-body">
+        <h4>Iteratives Scaling</h4>
+        <p>Was funktioniert wird skaliert, was nicht funktioniert wird sofort gestoppt. Kein Budget verbrennen auf Hypothesen die sich nicht beweisen. Konsequente Echtzeit-Optimierung hat innerhalb von 3 Monaten aus 179 € Umsatz über 398.000 € gemacht.</p>
+      </div>
     </div>
   </div>
 </div>
