@@ -286,26 +286,7 @@
     .result-img-icon { font-size: 2rem; opacity: 0.3; }
     .result-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    /* Featured Case Study Card */
-    .result-card.featured { flex: 0 0 720px; }
-    .result-card.featured .result-before-after {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
-    }
-    .before-after-img { position: relative; overflow: hidden; }
-    .before-after-img img { width: 100%; aspect-ratio: 9/16; object-fit: cover; object-position: top; display: block; }
-    .before-after-label {
-      position: absolute; top: 0.6rem; left: 0.6rem;
-      font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em;
-      text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 100px;
-    }
-    .label-before { background: rgba(0,0,0,0.7); color: var(--muted); border: 1px solid #333; }
-    .label-after { background: var(--gold); color: #000; }
-    .before-after-divider {
-      position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
-      background: var(--gold); transform: translateX(-50%); z-index: 2;
-    }
-    .featured .result-stats { gap: 0.75rem; }
-    .featured .result-stat-num { font-size: 1.6rem; }
+    .result-card.featured { flex: 0 0 340px; }
     .result-body { padding: 1.4rem; }
     .result-tag {
       font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
@@ -717,23 +698,15 @@
   <div class="slider-wrap">
     <div class="slider-track" id="slider-track">
 
-      <!-- FEATURED: Vorher / Nachher Case Study -->
+      <!-- FEATURED: Case Study -->
       <div class="result-card featured">
-        <div class="result-before-after" style="position:relative;">
-          <div class="before-after-divider"></div>
-          <div class="before-after-img">
-            <img src="result-juni.png" alt="Shopify Juni 2024 – Vorher">
-            <span class="before-after-label label-before">VORHER · Juni 2024</span>
-          </div>
-          <div class="before-after-img">
-            <img src="result-juli.png" alt="Shopify Juli 2024 – Nachher">
-            <span class="before-after-label label-after">NACHHER · Juli 2024</span>
-          </div>
+        <div class="result-img" style="aspect-ratio:auto; padding:0;">
+          <img src="result-juli.png" alt="Shopify Juli 2024 – 91.141€" style="width:100%; display:block; object-fit:cover; border-radius:14px 14px 0 0;">
         </div>
         <div class="result-body">
           <div class="result-tag">E-Commerce Brand · Paid Ads · High Season</div>
           <div class="result-title">Von 179 € auf 91.141 € — in einem Monat.</div>
-          <div class="result-stats featured">
+          <div class="result-stats">
             <div class="result-stat">
               <div class="result-stat-num">+50.618%</div>
               <div class="result-stat-label">Umsatz</div>
