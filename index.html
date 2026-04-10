@@ -285,6 +285,27 @@
     }
     .result-img-icon { font-size: 2rem; opacity: 0.3; }
     .result-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Featured Case Study Card */
+    .result-card.featured { flex: 0 0 720px; }
+    .result-card.featured .result-before-after {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    }
+    .before-after-img { position: relative; overflow: hidden; }
+    .before-after-img img { width: 100%; aspect-ratio: 9/16; object-fit: cover; object-position: top; display: block; }
+    .before-after-label {
+      position: absolute; top: 0.6rem; left: 0.6rem;
+      font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em;
+      text-transform: uppercase; padding: 0.25rem 0.7rem; border-radius: 100px;
+    }
+    .label-before { background: rgba(0,0,0,0.7); color: var(--muted); border: 1px solid #333; }
+    .label-after { background: var(--gold); color: #000; }
+    .before-after-divider {
+      position: absolute; top: 0; bottom: 0; left: 50%; width: 2px;
+      background: var(--gold); transform: translateX(-50%); z-index: 2;
+    }
+    .featured .result-stats { gap: 0.75rem; }
+    .featured .result-stat-num { font-size: 1.6rem; }
     .result-body { padding: 1.4rem; }
     .result-tag {
       font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
@@ -611,20 +632,20 @@
     </div>
     <div class="hero-stats">
       <div class="stat">
-        <div class="stat-num">+287%</div>
-        <div class="stat-label">Ø ROAS-Steigerung</div>
+        <div class="stat-num">+50.618%</div>
+        <div class="stat-label">Umsatzwachstum Kunde #1</div>
       </div>
       <div class="stat">
-        <div class="stat-num">7-stellig</div>
-        <div class="stat-label">Ad Spend verwaltet</div>
+        <div class="stat-num">398K €</div>
+        <div class="stat-label">Revenue in 3 Monaten</div>
       </div>
       <div class="stat">
-        <div class="stat-num">–41%</div>
-        <div class="stat-label">Ø CPA-Reduktion</div>
+        <div class="stat-num">1 Monat</div>
+        <div class="stat-label">Von 0 auf 91.000 €</div>
       </div>
       <div class="stat">
-        <div class="stat-num">60 Tage</div>
-        <div class="stat-label">Bis erste Ergebnisse</div>
+        <div class="stat-num">4,49%</div>
+        <div class="stat-label">Conv. Rate erreicht</div>
       </div>
     </div>
   </div>
@@ -696,103 +717,81 @@
   <div class="slider-wrap">
     <div class="slider-track" id="slider-track">
 
-      <div class="result-card">
-        <div class="result-img">
-          <!-- Ersetze durch: <img src="ergebnis-1.png" alt="Shopify Dashboard Kunde 1"> -->
-          <div class="result-img-icon">📸</div>
-          <span>Shopify Dashboard<br><strong style="color:var(--gold)">Bild hier hochladen</strong></span>
-        </div>
-        <div class="result-body">
-          <div class="result-tag">Fashion E-Commerce · Meta Ads</div>
-          <div class="result-title">Von 1.2× auf 4.8× ROAS in 45 Tagen</div>
-          <div class="result-stats">
-            <div class="result-stat">
-              <div class="result-stat-num">+287%</div>
-              <div class="result-stat-label">ROAS</div>
-            </div>
-            <div class="result-stat">
-              <div class="result-stat-num">–38%</div>
-              <div class="result-stat-label">CPA</div>
-            </div>
-            <div class="result-stat">
-              <div class="result-stat-num">45 Tage</div>
-              <div class="result-stat-label">Zeitraum</div>
-            </div>
+      <!-- FEATURED: Vorher / Nachher Case Study -->
+      <div class="result-card featured">
+        <div class="result-before-after" style="position:relative;">
+          <div class="before-after-divider"></div>
+          <div class="before-after-img">
+            <img src="result-juni.png" alt="Shopify Juni 2024 – Vorher">
+            <span class="before-after-label label-before">VORHER · Juni 2024</span>
+          </div>
+          <div class="before-after-img">
+            <img src="result-juli.png" alt="Shopify Juli 2024 – Nachher">
+            <span class="before-after-label label-after">NACHHER · Juli 2024</span>
           </div>
         </div>
-      </div>
-
-      <div class="result-card">
-        <div class="result-img">
-          <div class="result-img-icon">📸</div>
-          <span>Ads Manager Screenshot<br><strong style="color:var(--gold)">Bild hier hochladen</strong></span>
-        </div>
         <div class="result-body">
-          <div class="result-tag">Beauty Brand · TikTok Ads</div>
-          <div class="result-title">6-stelliger Monatsumsatz durch TikTok</div>
-          <div class="result-stats">
+          <div class="result-tag">E-Commerce Brand · Paid Ads · High Season</div>
+          <div class="result-title">Von 179 € auf 91.141 € — in einem Monat.</div>
+          <div class="result-stats featured">
             <div class="result-stat">
-              <div class="result-stat-num">×3.4</div>
-              <div class="result-stat-label">ROAS</div>
-            </div>
-            <div class="result-stat">
-              <div class="result-stat-num">+220%</div>
-              <div class="result-stat-label">Revenue</div>
-            </div>
-            <div class="result-stat">
-              <div class="result-stat-num">60 Tage</div>
-              <div class="result-stat-label">Zeitraum</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="result-card">
-        <div class="result-img">
-          <div class="result-img-icon">📸</div>
-          <span>Google Ads Dashboard<br><strong style="color:var(--gold)">Bild hier hochladen</strong></span>
-        </div>
-        <div class="result-body">
-          <div class="result-tag">Home & Living · Google Shopping</div>
-          <div class="result-title">CPA um 41% gesenkt bei gleichem Budget</div>
-          <div class="result-stats">
-            <div class="result-stat">
-              <div class="result-stat-num">–41%</div>
-              <div class="result-stat-label">CPA</div>
-            </div>
-            <div class="result-stat">
-              <div class="result-stat-num">+180%</div>
-              <div class="result-stat-label">Conversions</div>
-            </div>
-            <div class="result-stat">
-              <div class="result-stat-num">30 Tage</div>
-              <div class="result-stat-label">Zeitraum</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="result-card">
-        <div class="result-img">
-          <div class="result-img-icon">📸</div>
-          <span>Vorher / Nachher<br><strong style="color:var(--gold)">Bild hier hochladen</strong></span>
-        </div>
-        <div class="result-body">
-          <div class="result-tag">Sports Brand · Meta + TikTok</div>
-          <div class="result-title">Omnichannel Scale: 3× Umsatz in Q4</div>
-          <div class="result-stats">
-            <div class="result-stat">
-              <div class="result-stat-num">×3</div>
+              <div class="result-stat-num">+50.618%</div>
               <div class="result-stat-label">Umsatz</div>
             </div>
             <div class="result-stat">
-              <div class="result-stat-num">+95%</div>
-              <div class="result-stat-label">ROAS</div>
+              <div class="result-stat-num">91.141 €</div>
+              <div class="result-stat-label">Juli Revenue</div>
             </div>
             <div class="result-stat">
-              <div class="result-stat-num">Q4</div>
-              <div class="result-stat-label">Peak Season</div>
+              <div class="result-stat-num">1.719</div>
+              <div class="result-stat-label">Bestellungen</div>
             </div>
+            <div class="result-stat">
+              <div class="result-stat-num">4,49%</div>
+              <div class="result-stat-label">Conv. Rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gesamtzeitraum Card -->
+      <div class="result-card">
+        <div class="result-img">
+          <img src="result-gesamt.png" alt="Shopify Gesamtergebnis Juli–Sept 2024">
+        </div>
+        <div class="result-body">
+          <div class="result-tag">Gleiche Brand · Juli – September 2024</div>
+          <div class="result-title">398.517 € in 3 Monaten</div>
+          <div class="result-stats">
+            <div class="result-stat">
+              <div class="result-stat-num">398K €</div>
+              <div class="result-stat-label">Gesamtumsatz</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-stat-num">7.615</div>
+              <div class="result-stat-label">Bestellungen</div>
+            </div>
+            <div class="result-stat">
+              <div class="result-stat-num">+221K%</div>
+              <div class="result-stat-label">Wachstum</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Placeholder für weitere Ergebnisse -->
+      <div class="result-card">
+        <div class="result-img">
+          <div class="result-img-icon">📸</div>
+          <span>Nächstes Ergebnis<br><strong style="color:var(--gold)">Screenshot schicken</strong></span>
+        </div>
+        <div class="result-body">
+          <div class="result-tag">Deine Brand · Dein Kanal</div>
+          <div class="result-title">Dein Ergebnis kommt hier rein</div>
+          <div class="result-stats">
+            <div class="result-stat"><div class="result-stat-num">—</div><div class="result-stat-label">ROAS</div></div>
+            <div class="result-stat"><div class="result-stat-num">—</div><div class="result-stat-label">Revenue</div></div>
+            <div class="result-stat"><div class="result-stat-num">—</div><div class="result-stat-label">Zeitraum</div></div>
           </div>
         </div>
       </div>
