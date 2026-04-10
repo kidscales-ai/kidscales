@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kidscales — Paid Ads Agentur für E-Commerce</title>
+  <script src="https://fast.wistia.com/player.js" async></script>
+  <script src="https://fast.wistia.com/embed/hd8c56diff.js" async type="module"></script>
+  <style>wistia-player[media-id='hd8c56diff']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/hd8c56diff/swatch'); display: block; filter: blur(5px); padding-top:177.78%; }</style>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -134,34 +137,12 @@
 
     /* ── VSL VIDEO ── */
     .hero-vsl {
-      position: relative; border-radius: 16px; overflow: hidden;
+      border-radius: 16px; overflow: hidden;
       border: 1px solid rgba(197,241,53,0.15);
       box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 60px rgba(197,241,53,0.05);
-      background: #000; width: 100%;
+      width: 100%; max-width: 700px; margin: 0 auto;
     }
-    .hero-vsl video { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
-    .hero-vsl::after {
-      content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent); z-index: 3;
-    }
-    .vsl-overlay {
-      position: absolute; inset: 0; z-index: 4;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.5);
-      cursor: pointer; transition: background 0.3s;
-    }
-    .vsl-overlay:hover { background: rgba(0,0,0,0.35); }
-    .vsl-overlay.hidden { display: none; }
-    .vsl-play-btn {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .vsl-overlay:hover .vsl-play-btn {
-      transform: scale(1.1); box-shadow: 0 0 40px rgba(197,241,53,0.5);
-    }
-    .vsl-play-btn svg { width: 26px; height: 26px; fill: #000; margin-left: 4px; }
+    .hero-vsl wistia-player { display: block; width: 100%; }
 
     .hero-vsl-cta {
       margin-top: 1.8rem; display: flex; justify-content: center;
@@ -654,14 +635,7 @@
 
     <!-- VSL Video -->
     <div class="hero-vsl">
-      <video id="vsl-video" preload="none" playsinline controls>
-        <source src="video.mp4" type="video/mp4" />
-      </video>
-      <div class="vsl-overlay" id="vsl-overlay">
-        <div class="vsl-play-btn">
-          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-        </div>
-      </div>
+      <wistia-player media-id="hd8c56diff" aspect="0.5625"></wistia-player>
     </div>
 
     <!-- CTA unter Video -->
@@ -1210,17 +1184,6 @@
   document.getElementById('slide-next').addEventListener('click', () => { track.scrollBy({ left: 360, behavior: 'smooth' }); });
   document.getElementById('slide-prev').addEventListener('click', () => { track.scrollBy({ left: -360, behavior: 'smooth' }); });
 
-  /* ── VSL VIDEO ── */
-  const vslVideo = document.getElementById('vsl-video');
-  const vslOverlay = document.getElementById('vsl-overlay');
-  if (vslVideo && vslOverlay) {
-    vslOverlay.addEventListener('click', () => {
-      vslOverlay.classList.add('hidden');
-      vslVideo.play();
-    });
-    vslVideo.addEventListener('pause', () => vslOverlay.classList.remove('hidden'));
-    vslVideo.addEventListener('ended', () => vslOverlay.classList.remove('hidden'));
-  }
 
   /* ── FORM ── */
   document.getElementById('contact-form').addEventListener('submit', async function(e) {
