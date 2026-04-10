@@ -524,6 +524,8 @@
     }
     .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(197,241,53,0.4); }
     .form-note { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 0.5rem; }
+    .field-error { font-size: 0.75rem; color: #ff5555; margin-top: 0.3rem; display: none; }
+    .input-error { border-color: #ff5555 !important; box-shadow: 0 0 0 3px rgba(255,85,85,0.1) !important; }
     #success-msg {
       display: none; background: rgba(197,241,53,0.06);
       border: 1px solid rgba(197,241,53,0.3); border-radius: 12px;
@@ -1031,11 +1033,13 @@
       <div class="form-row">
         <div>
           <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Max Mustermann" required />
+          <input type="text" id="name" name="name" placeholder="Max Mustermann" />
+          <div class="field-error" id="name-error">Bitte gib deinen Namen ein.</div>
         </div>
         <div>
           <label for="email">E-Mail</label>
-          <input type="email" id="email" name="email" placeholder="max@brand.de" required />
+          <input type="email" id="email" name="email" placeholder="max@brand.de" />
+          <div class="field-error" id="email-error">Bitte gib eine gültige E-Mail ein.</div>
         </div>
       </div>
       <div>
@@ -1051,10 +1055,12 @@
           <option>10.000 € – 30.000 €</option>
           <option>Über 30.000 €</option>
         </select>
+        <div class="field-error" id="budget-error">Bitte wähle dein monatliches Budget.</div>
       </div>
       <div>
         <label for="message">Was willst du erreichen?</label>
         <textarea id="message" name="message" placeholder="Erzähl mir kurz von deiner Brand, deinen aktuellen Kanälen und was du dir erhoffst..."></textarea>
+        <div class="field-error" id="message-error">Bitte schreib kurz was du erreichen möchtest.</div>
       </div>
       <button type="submit" class="form-submit">Kostenloses Erstgespräch anfragen →</button>
       <p class="form-note">Kein Spam. Kein Verkaufsdruck. Ein ehrliches Gespräch auf Augenhöhe.</p>
@@ -1193,6 +1199,37 @@
   /* ── FORM ── */
   document.getElementById('contact-form').addEventListener('submit', async function(e) {
     e.preventDefault();
+
+    // Validation
+    let valid = true;
+
+    function showError(inputId, errorId) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      input.classList.add('input-error');
+      error.style.display = 'block';
+      valid = false;
+    }
+    function clearError(inputId, errorId) {
+      const input = document.getElementById(inputId);
+      const error = document.getElementById(errorId);
+      input.classList.remove('input-error');
+      error.style.display = 'none';
+    }
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const budget = document.getElementById('budget').value;
+    const message = document.getElementById('message').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    name    ? clearError('name', 'name-error')       : showError('name', 'name-error');
+    (email && emailRegex.test(email)) ? clearError('email', 'email-error') : showError('email', 'email-error');
+    budget  ? clearError('budget', 'budget-error')   : showError('budget', 'budget-error');
+    message ? clearError('message', 'message-error') : showError('message', 'message-error');
+
+    if (!valid) return;
+
     const btn = this.querySelector('.form-submit');
     btn.textContent = 'Wird gesendet...'; btn.disabled = true;
     try {
