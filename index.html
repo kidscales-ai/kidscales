@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kidscales — Performance Marketing</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --bg2: #0e0e0e;
+      --bg3: #141414;
+      --gold: #3b82f6;
+      --gold-light: #60a5fa;
+      --gold-dim: rgba(59,130,246,0.12);
+      --white: #f0f0f0;
+      --muted: #777;
+      --border: rgba(59,130,246,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── CANVAS BG ── */
+    #particle-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 6%;
+      background: rgba(8,8,8,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #000;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      letter-spacing: 0.07em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .nav-cta:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(59,130,246,0.35);
+    }
+
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--gold); border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 62px; left: 0; right: 0;
+      background: rgba(8,8,8,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 6%;
+      z-index: 99;
+      flex-direction: column;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    .mobile-menu a:last-child { border-bottom: none; color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 6% 4rem;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+      top: -15%; left: 50%;
+      transform: translateX(-50%);
+      animation: float1 8s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+      bottom: 10%; right: 5%;
+      animation: float2 10s ease-in-out infinite;
+    }
+    .orb-3 {
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
+      bottom: 20%; left: 5%;
+      animation: float2 12s ease-in-out infinite reverse;
+    }
+
+    @keyframes float1 {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-30px); }
+    }
+    @keyframes float2 {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .hero-inner { position: relative; z-index: 2; }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid rgba(59,130,246,0.4);
+      color: var(--gold);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.45rem 1.1rem;
+      border-radius: 100px;
+      margin-bottom: 2rem;
+      background: rgba(59,130,246,0.05);
+      backdrop-filter: blur(10px);
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    #hero h1 {
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.04;
+      margin-bottom: 1.5rem;
+    }
+
+    .grad-text {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, #e0f2fe 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    #hero p {
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn-primary {
+      position: relative;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #000;
+      padding: 0.9rem 2rem;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(59,130,246,0.4); }
+    .btn-primary:hover::after { opacity: 1; }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.03);
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      background: rgba(59,130,246,0.06);
+      transform: translateY(-2px);
+    }
+
+    /* Stats */
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 5rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat {
+      text-align: center;
+      padding: 0 2.5rem;
+      position: relative;
+    }
+    .stat:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 10%; bottom: 10%;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .stat-num {
+      font-size: 2.4rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    /* ── SHARED ── */
+    section { padding: 6rem 6%; position: relative; z-index: 1; }
+    #why-wrap { padding: 6rem 6%; position: relative; z-index: 1; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+    }
+    .section-label::before {
+      content: '';
+      width: 20px; height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .section-sub { color: var(--muted); max-width: 480px; margin-bottom: 3rem; font-size: 0.95rem; }
+
+    /* ── VIDEO ── */
+    #video-section {
+      padding: 5rem 6%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .video-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+    }
+
+    .video-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(59,130,246,0.25);
+      box-shadow: 0 0 0 1px rgba(59,130,246,0.05),
+                  0 40px 100px rgba(0,0,0,0.6),
+                  0 0 60px rgba(59,130,246,0.06);
+      background: #000;
+    }
+
+    .video-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.04), transparent 50%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Top gold line */
+    .video-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      z-index: 3;
+    }
+
+    #explainer-video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    /* Custom play overlay */
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(2px);
+      cursor: pointer;
+      transition: background 0.3s;
+      z-index: 4;
+      border-radius: 16px;
+    }
+
+    .video-overlay.hidden { display: none; }
+
+    .video-overlay:hover { background: rgba(0,0,0,0.4); }
+
+    .play-btn {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s, box-shadow 0.25s;
+      margin-bottom: 1.2rem;
+    }
+
+    .video-overlay:hover .play-btn {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(59,130,246,0.5);
+    }
+
+    .play-btn svg {
+      width: 28px; height: 28px;
+      fill: #000;
+      margin-left: 4px;
+    }
+
+    .play-label {
+      color: var(--white);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .play-duration {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.75rem;
+      margin-top: 0.3rem;
+      letter-spacing: 0.08em;
+    }
+
+    /* Placeholder when no video */
+    .video-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0e0e0e, #111);
+      gap: 1rem;
+    }
+
+    .placeholder-icon { font-size: 3rem; opacity: 0.3; }
+    .placeholder-text {
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+      line-height: 1.6;
+    }
+    .placeholder-text strong { color: var(--gold); display: block; margin-bottom: 0.3rem; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--bg2); }
+
+    .services-header { max-width: 1100px; margin: 0 auto 3rem; }
+
+    .services-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.25s, box-shadow 0.3s;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at center, rgba(59,130,246,0.04) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .service-card:hover {
+      border-color: rgba(59,130,246,0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(59,130,246,0.1);
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-card:hover::after { opacity: 1; }
+
+    .service-icon-wrap {
+      width: 48px; height: 48px;
+      border-radius: 10px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(59,130,246,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+    .service-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
+
+    /* ── WHY ── */
+    .why-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .why-points { display: flex; flex-direction: column; gap: 1.8rem; margin-top: 2rem; }
+
+    .why-point {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.2rem;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .why-point:hover {
+      border-color: var(--border);
+      background: rgba(59,130,246,0.03);
+    }
+
+    .why-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(59,130,246,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .why-point h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .why-point p { color: var(--muted); font-size: 0.87rem; }
+
+    /* Metrics panel */
+    .metrics-panel {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metrics-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .metrics-glow {
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .panel-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .metric-item { margin-bottom: 1.4rem; }
+    .metric-item:last-child { margin-bottom: 0; }
+
+    .metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .metric-name { font-size: 0.85rem; color: var(--muted); }
+    .metric-value {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .metric-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .metric-fill {
+      height: 100%;
+      border-radius: 100px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      width: 0%;
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .kpi-box {
+      background: rgba(59,130,246,0.05);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .kpi-num {
+      font-size: 1.5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .kpi-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--bg2); }
+
+    .contact-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+    .contact-inner .section-sub { margin: 0 auto 2.5rem; }
+
+    form { display: flex; flex-direction: column; gap: 1rem; text-align: left; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--white);
+      padding: 0.85rem 1rem;
+      font-size: 0.92rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: rgba(59,130,246,0.6);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.08);
+    }
+    textarea { resize: vertical; min-height: 130px; }
+    select option { background: var(--bg3); }
+
+    .form-submit {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: #000;
+      border: none;
+      padding: 1rem;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      letter-spacing: 0.07em;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      margin-top: 0.5rem;
+    }
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(59,130,246,0.4);
+    }
+
+    .form-note { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 0.5rem; }
+
+    #success-msg {
+      display: none;
+      background: rgba(59,130,246,0.06);
+      border: 1px solid rgba(59,130,246,0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--gold);
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 6%;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .footer-logo {
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-copy { color: var(--muted); font-size: 0.78rem; }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 2rem;
+      padding-top: 1.2rem;
+      margin-top: 1.2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-nav a {
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--gold); }
+
+    .footer-disclaimer {
+      margin-top: 1.2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(59,130,246,0.08);
+      color: #444;
+      font-size: 0.72rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* Stagger children */
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .stagger.visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.05s; }
+    .stagger.visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.15s; }
+    .stagger.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.25s; }
+    .stagger.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.35s; }
+    .stagger.visible > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.45s; }
+    .stagger.visible > *:nth-child(6) { opacity: 1; transform: none; transition-delay: 0.55s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 4rem 5%; }
+      #why-wrap { padding: 4rem 5%; }
+      #hero { padding: 6.5rem 5% 3rem; min-height: auto; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+      .hero-stats { margin-top: 3rem; padding-top: 2rem; }
+      .stat { padding: 0 1.2rem; }
+      .stat:not(:last-child)::after { display: none; }
+      .stat-num { font-size: 1.8rem; }
+      .services-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 400px) {
+      #hero h1 { font-size: 2.1rem; }
+      .stat { padding: 0.5rem 1rem; }
+      .hero-stats { flex-direction: column; align-items: center; gap: 1.2rem; }
+      .stat:not(:last-child)::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="particle-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">KIDSCALES</a>
+  <ul class="nav-links">
+    <li><a href="#video-section">Video</a></li>
+    <li><a href="#services">Leistungen</a></li>
+    <li><a href="#why">Warum wir</a></li>
+    <li><a href="#contact">Kontakt</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Jetzt anfragen</a>
+  <button class="hamburger" id="hamburger" aria-label="Menü">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#video-section" class="mobile-link">Video</a>
+  <a href="#services" class="mobile-link">Leistungen</a>
+  <a href="#why" class="mobile-link">Warum wir</a>
+  <a href="#contact" class="mobile-link">Kontakt</a>
+  <a href="#contact" class="mobile-link">Jetzt anfragen →</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-inner">
+    <div class="hero-tag">Performance Marketing Agentur · D-A-CH</div>
+    <h1>Wir skalieren deine<br><span class="grad-text">Brand. Profitabel.</span></h1>
+    <p>Kidscales ist die Performance Marketing Agentur für deutsche Brands, die bereit sind zu wachsen — datengetrieben, ohne Kompromisse.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="#contact">Kostenloses Erstgespräch</a>
+      <a class="btn-secondary" href="#services">Unsere Leistungen</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">7-stellig</div>
+        <div class="stat-label">Ad Spend verwaltet</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3×</div>
+        <div class="stat-label">Durchschn. ROAS</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">D-A-CH</div>
+        <div class="stat-label">Fokus-Markt</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="video-section">
+  <div class="video-header fade-in">
+    <div class="section-label">Erklärvideo</div>
+    <h2 class="section-title">So arbeiten wir.</h2>
+    <p class="section-sub" style="margin: 0 auto;">In 5 Minuten zeigen wir dir, wie Kidscales deutsche Brands profitabel skaliert — von der Strategie bis zum ersten ROAS-Sprung.</p>
+  </div>
+
+  <div class="video-wrapper fade-in">
+    <!-- Sobald du dein Video hast: lege video.mp4 in denselben Ordner wie index.html -->
+    <video id="explainer-video" preload="metadata" playsinline>
+      <source src="video.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Overlay (wird ausgeblendet sobald Video lädt) -->
+    <div class="video-overlay" id="video-overlay">
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+      <div class="play-label">Video abspielen</div>
+      <div class="play-duration">ca. 5 Minuten</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header fade-in">
+    <div class="section-label">Leistungen</div>
+    <h2 class="section-title">Was wir für dich liefern</h2>
+    <p class="section-sub">Von der Strategie bis zur täglichen Optimierung — wir übernehmen deinen kompletten Paid-Media-Kanal.</p>
+  </div>
+  <div class="services-grid stagger">
+    <div class="service-card">
+      <div class="service-icon-wrap">⚡</div>
+      <h3>Meta Ads</h3>
+      <p>Skalierbare Kampagnen für E-Commerce und Lead-Gen — von der Creative-Strategie bis zur täglichen Budget-Optimierung. Wir holen das Maximum aus jedem Euro raus.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon-wrap">🎯</div>
+      <h3>Google & YouTube Ads</h3>
+      <p>Search, Shopping und Performance Max — profitabel strukturiert, konsequent auf den deutschen Markt ausgerichtet und täglich optimiert.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon-wrap">📊</div>
+      <h3>Tracking & Analytics</h3>
+      <p>Sauberes Conversion-Tracking mit GA4, Meta Pixel und Server-Side-Events. Wir geben dir die Datenbasis, auf der echte Entscheidungen getroffen werden.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon-wrap">🚀</div>
+      <h3>Strategie & Audit</h3>
+      <p>Wir analysieren wo dein Ad Account Geld verbrennt und liefern einen konkreten, umsetzbaren Aktionsplan — innerhalb von 48 Stunden.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon-wrap">🎨</div>
+      <h3>Creative-Strategie</h3>
+      <p>Wir entwickeln datengetriebene Creative-Briefings und zeigen dir präzise, welche Konzepte im D-A-CH-Markt wirklich konvertieren.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon-wrap">📈</div>
+      <h3>Reporting & Transparenz</h3>
+      <p>Wöchentliche Reports, klare KPIs — du weißt zu jeder Zeit genau, was dein Budget bringt. Bei uns gibt es keine Blackbox.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<div id="why-wrap">
+  <div class="why-grid">
+    <div class="fade-in">
+      <div class="section-label">Warum Kidscales</div>
+      <h2 class="section-title">Wir denken nicht<br>in Impressionen.<br><span class="grad-text">Wir denken in ROI.</span></h2>
+      <p class="section-sub">Kidscales ist keine klassische Agentur. Wir sind ein spezialisiertes Performance-Team — fokussiert auf einen Markt, eine Disziplin, ein Ziel: dein Wachstum.</p>
+      <div class="why-points">
+        <div class="why-point">
+          <div class="why-icon">🇩🇪</div>
+          <div>
+            <h4>100% D-A-CH-Fokus</h4>
+            <p>Wir kennen den deutschen Konsumenten, die lokalen Plattform-Algorithmen und was hier wirklich konvertiert.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">⚡</div>
+          <div>
+            <h4>Kein Overhead. Kein Bullshit.</h4>
+            <p>Du arbeitest direkt mit Senior-Experten — keine Junior-Account-Manager, keine sinnlosen Status-Calls.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">📊</div>
+          <div>
+            <h4>Data over Opinion</h4>
+            <p>Jede Entscheidung basiert auf Zahlen. Wir optimieren für deinen echten ROI — nicht für Likes oder Reichweite.</p>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-icon">🔓</div>
+          <div>
+            <h4>Radikale Transparenz</h4>
+            <p>Deine Accounts, deine Daten, deine Assets — immer. Wir arbeiten in deinen Tools, nicht in unserer Blackbox.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="metrics-panel fade-in">
+      <div class="metrics-glow"></div>
+      <div class="panel-title">Live Performance Dashboard</div>
+
+      <div class="metric-item">
+        <div class="metric-header">
+          <span class="metric-name">ROAS Meta Ads</span>
+          <span class="metric-value">6.2×</span>
+        </div>
+        <div class="metric-bar"><div class="metric-fill" data-width="85"></div></div>
+      </div>
+
+      <div class="metric-item">
+        <div class="metric-header">
+          <span class="metric-name">CPA-Optimierung</span>
+          <span class="metric-value">–35%</span>
+        </div>
+        <div class="metric-bar"><div class="metric-fill" data-width="70"></div></div>
+      </div>
+
+      <div class="metric-item">
+        <div class="metric-header">
+          <span class="metric-name">Google Ads ROAS</span>
+          <span class="metric-value">4.8×</span>
+        </div>
+        <div class="metric-bar"><div class="metric-fill" data-width="78"></div></div>
+      </div>
+
+      <div class="metric-item">
+        <div class="metric-header">
+          <span class="metric-name">CTR Steigerung</span>
+          <span class="metric-value">+120%</span>
+        </div>
+        <div class="metric-bar"><div class="metric-fill" data-width="92"></div></div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi-box">
+          <div class="kpi-num">48h</div>
+          <div class="kpi-label">Audit Turnaround</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-num">2×</div>
+          <div class="kpi-label">Scale in 60 Tagen</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-num">100%</div>
+          <div class="kpi-label">Daten-Transparenz</div>
+        </div>
+        <div class="kpi-box">
+          <div class="kpi-num">D-A-CH</div>
+          <div class="kpi-label">Markt-Fokus</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner fade-in">
+    <div class="section-label">Kontakt</div>
+    <h2 class="section-title">Bereit für echtes Wachstum?</h2>
+    <p class="section-sub">Füll das Formular aus — wir melden uns innerhalb von 24 Stunden für ein kostenloses Erstgespräch.</p>
+
+    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" novalidate>
+      <input type="hidden" name="access_key" value="85906172-42d3-4aa2-8159-eaed3deaee4c" />
+      <input type="hidden" name="subject" value="Neue Anfrage über Kidscales" />
+      <input type="hidden" name="from_name" value="Kidscales Website" />
+      <input type="hidden" name="redirect" value="false" />
+      <input type="checkbox" name="botcheck" style="display:none" />
+      <div class="form-row">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Max Mustermann" required />
+        </div>
+        <div>
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" name="email" placeholder="max@brand.de" required />
+        </div>
+      </div>
+      <div>
+        <label for="brand">Deine Brand / Website</label>
+        <input type="text" id="brand" name="brand" placeholder="brand.de" />
+      </div>
+      <div>
+        <label for="budget">Monatliches Ad Budget</label>
+        <select id="budget" name="budget">
+          <option value="">Bitte wählen...</option>
+          <option>Unter 5.000 €</option>
+          <option>5.000 € – 15.000 €</option>
+          <option>15.000 € – 50.000 €</option>
+          <option>Über 50.000 €</option>
+        </select>
+      </div>
+      <div>
+        <label for="message">Was willst du erreichen?</label>
+        <textarea id="message" name="message" placeholder="Erzähl mir kurz von deiner Brand und deinem Ziel..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Kostenloses Erstgespräch anfragen →</button>
+      <p class="form-note">Kein Spam. Kein Verkaufsdruck. Ein ehrliches Gespräch auf Augenhöhe.</p>
+    </form>
+    <div id="success-msg">Danke! Wir melden uns innerhalb von 24 Stunden bei dir.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <span class="footer-logo">KIDSCALES</span>
+    <span class="footer-copy">© 2026 Kidscales Performance Marketing · Deutschland</span>
+  </div>
+  <div class="footer-nav">
+    <a href="#services">Leistungen</a>
+    <a href="#contact">Termin vereinbaren</a>
+    <a href="#why">Warum wir</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="impressum.html">Impressum</a>
+  </div>
+  <div class="footer-disclaimer">
+    © 2026 Kidscales Performance Marketing. Alle Rechte vorbehalten. | Diese Website steht in keiner Verbindung zu Meta Platforms Inc. oder Google LLC und wird von diesen nicht unterstützt. FACEBOOK und INSTAGRAM sind eingetragene Marken von Meta Platforms, Inc. GOOGLE und YOUTUBE sind eingetragene Marken von Google LLC. Alle auf dieser Website dargestellten Ergebnisse, Kennzahlen und Fallbeispiele basieren auf individuellen Kundenprojekten und stellen kein allgemeines Leistungsversprechen dar. Tatsächliche Ergebnisse können variieren. Maßgeblich für Leistungsumfang und Konditionen ist ausschließlich das individuelle Angebot.
+  </div>
+</footer>
+
+<script>
+  /* ── PARTICLE CANVAS ── */
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 1.5 + 0.3;
+      this.speedX = (Math.random() - 0.5) * 0.25;
+      this.speedY = (Math.random() - 0.5) * 0.25;
+      this.opacity = Math.random() * 0.4 + 0.1;
+      this.pulse = Math.random() * Math.PI * 2;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.pulse += 0.01;
+      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+    }
+    draw() {
+      const o = this.opacity * (0.7 + 0.3 * Math.sin(this.pulse));
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201, 168, 76, ${o})`;
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < 100; i++) particles.push(new Particle());
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => { p.update(); p.draw(); });
+
+    // Draw faint connections
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(59,130,246,${0.04 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+
+  /* ── INTERSECTION OBSERVER ── */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // Trigger metric bars
+        e.target.querySelectorAll('.metric-fill').forEach(bar => {
+          bar.style.width = bar.dataset.width + '%';
+        });
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in, .stagger').forEach(el => io.observe(el));
+
+  /* ── HAMBURGER ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-link').forEach(l => {
+    l.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+  /* ── VIDEO PLAYER ── */
+  const video = document.getElementById('explainer-video');
+  const overlay = document.getElementById('video-overlay');
+
+  // Check if video source is accessible
+  video.addEventListener('error', () => {
+    // No video file yet — show placeholder
+    video.style.display = 'none';
+    const ph = document.createElement('div');
+    ph.className = 'video-placeholder';
+    ph.innerHTML = `
+      <div class="placeholder-icon">🎬</div>
+      <div class="placeholder-text">
+        <strong>Dein Video kommt hierher</strong>
+        Lege deine Videodatei als <code style="color:var(--gold)">video.mp4</code><br>
+        in denselben Ordner wie diese Datei.
+      </div>`;
+    video.parentNode.insertBefore(ph, video);
+    overlay.querySelector('.play-label').textContent = 'Video noch nicht hochgeladen';
+    overlay.querySelector('.play-duration').textContent = 'video.mp4 in den Ordner legen';
+  });
+
+  overlay.addEventListener('click', () => {
+    if (video.readyState === 0) return; // no source loaded
+    overlay.classList.add('hidden');
+    video.play();
+  });
+
+  video.addEventListener('pause', () => { overlay.classList.remove('hidden'); });
+  video.addEventListener('ended', () => { overlay.classList.remove('hidden'); });
+
+  /* ── FORM ── */
+  document.getElementById('contact-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    if (!name || !email) {
+      alert('Bitte Name und E-Mail ausfüllen.');
+      return;
+    }
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = 'Wird gesendet...';
+    btn.disabled = true;
+
+    const formData = new FormData(this);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+      const json = await res.json();
+      if (json.success) {
+        this.style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+      } else {
+        btn.textContent = 'Anfrage absenden →';
+        btn.disabled = false;
+        alert('Fehler beim Senden. Bitte versuche es erneut.');
+      }
+    } catch(err) {
+      btn.textContent = 'Anfrage absenden →';
+      btn.disabled = false;
+      alert('Netzwerkfehler. Bitte versuche es erneut.');
+    }
+  });
+</script>
+</body>
+</html>
