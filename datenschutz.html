@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Datenschutzerklärung — Kidscales</title>
+  <title>Datenschutzerklärung — Kidscales Media</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -11,51 +11,31 @@
       --white: #f0f0f0; --muted: #777; --border: rgba(197,241,53,0.15);
     }
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--white); line-height: 1.7; }
-
     nav {
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.1rem 6%; border-bottom: 1px solid var(--border);
       background: rgba(13,14,11,0.95);
     }
-    .nav-logo {
-      font-size: 1.2rem; font-weight: 800; letter-spacing: 0.12em;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; text-decoration: none;
-    }
     .nav-back { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
     .nav-back:hover { color: var(--gold); }
-
     main { max-width: 760px; margin: 0 auto; padding: 5rem 6%; }
-
     h1 {
       font-size: 2rem; font-weight: 900; margin-bottom: 2.5rem;
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-
     h2 { font-size: 0.8rem; font-weight: 700; color: var(--gold); margin: 2rem 0 0.5rem; letter-spacing: 0.05em; text-transform: uppercase; }
-
     p { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.75rem; }
-
-    .block {
-      background: #111210; border: 1px solid var(--border);
-      border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem;
-    }
-
-    footer {
-      text-align: center; padding: 2rem 6%;
-      border-top: 1px solid var(--border);
-      color: var(--muted); font-size: 0.8rem;
-    }
+    a { color: var(--gold); text-decoration: none; }
+    .block { background: #111210; border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin-bottom: 1.5rem; }
+    footer { text-align: center; padding: 2rem 6%; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.8rem; }
     footer a { color: var(--gold); text-decoration: none; margin: 0 0.5rem; }
   </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html" style="-webkit-text-fill-color:unset; background:none;"><img src="logo.png" alt="Kidscales Media" style="height:36px;width:auto;display:block;"></a>
+  <a href="index.html" style="display:block;"><img src="logo.png" alt="Kidscales Media" style="height:52px;width:auto;display:block;"></a>
   <a class="nav-back" href="index.html">← Zurück zur Website</a>
 </nav>
 
@@ -64,50 +44,88 @@
 
   <div class="block">
     <h2>1. Verantwortlicher</h2>
-    <p>Max Mustermann<br>Musterstraße 12, 10115 Berlin<br>E-Mail: khederaltnji@gmx.net</p>
+    <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:</p>
+    <p><strong style="color:var(--white)">Kheder Altnji — Kidscales Media</strong><br>
+    Flachsrottenweg 29<br>
+    32657 Lemgo<br>
+    Deutschland<br>
+    E-Mail: <a href="mailto:khederaltnji@gmx.net">khederaltnji@gmx.net</a></p>
   </div>
 
   <div class="block">
     <h2>2. Allgemeines zur Datenverarbeitung</h2>
-    <p>Kidscales Media verarbeitet personenbezogene Daten ausschließlich soweit dies zur Bereitstellung einer funktionsfähigen Website sowie unserer Leistungen erforderlich ist. Die Verarbeitung erfolgt auf Grundlage der DSGVO.</p>
+    <p>Wir verarbeiten personenbezogene Daten grundsätzlich nur, soweit dies zur Bereitstellung einer funktionsfähigen Website sowie unserer Inhalte und Leistungen erforderlich ist. Die Verarbeitung personenbezogener Daten erfolgt regelmäßig nur nach Einwilligung des Nutzers. Eine Ausnahme gilt in solchen Fällen, in denen eine vorherige Einholung einer Einwilligung aus tatsächlichen Gründen nicht möglich ist und die Verarbeitung der Daten durch gesetzliche Vorschriften gestattet ist.</p>
   </div>
 
   <div class="block">
-    <h2>3. Hosting</h2>
-    <p>Diese Website wird bei <strong style="color:var(--white)">Netlify, Inc.</strong> (44 Montgomery Street, Suite 300, San Francisco, CA 94104, USA) gehostet. Beim Aufruf der Website werden automatisch Verbindungsdaten (IP-Adresse, Datum, Uhrzeit, aufgerufene Seite) im Server-Log erfasst. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.</p>
+    <h2>3. Hosting & Server-Logs</h2>
+    <p>Diese Website wird über <strong style="color:var(--white)">GitHub Pages</strong> (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) gehostet. Beim Aufruf unserer Website werden durch den Hosting-Anbieter automatisch folgende Daten in sogenannten Server-Log-Dateien erfasst:</p>
+    <p>• IP-Adresse des anfragenden Rechners<br>
+    • Datum und Uhrzeit des Zugriffs<br>
+    • Name und URL der abgerufenen Datei<br>
+    • Website, von der aus der Zugriff erfolgt (Referrer-URL)<br>
+    • Verwendeter Browser und ggf. das Betriebssystem</p>
+    <p style="margin-top:0.5rem">Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der sicheren und effizienten Bereitstellung der Website). Die Daten werden nach 7 Tagen automatisch gelöscht. GitHub Inc. ist nach dem EU-US Data Privacy Framework zertifiziert. Weitere Informationen: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub Privacy Statement</a>.</p>
   </div>
 
   <div class="block">
-    <h2>4. Kontaktformular</h2>
-    <p>Bei Nutzung unseres Kontaktformulars werden folgende Daten erhoben:</p>
-    <p>• Name<br>• E-Mail-Adresse<br>• Website / Brand<br>• Monatliches Budget<br>• Nachricht</p>
-    <p style="margin-top:0.75rem">Die Übermittlung erfolgt über den Dienst <strong style="color:var(--white)">Web3Forms</strong> (Anbieter: Web3Forms, datenschutzkonform verarbeitet). Die Daten werden ausschließlich zur Bearbeitung deiner Anfrage genutzt und nicht an Dritte weitergegeben. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO.</p>
+    <h2>4. Terminbuchung via Calendly</h2>
+    <p>Auf unserer Website ist ein Buchungs-Widget des Dienstes <strong style="color:var(--white)">Calendly</strong> (Calendly LLC, 271 17th Street NW, Suite 1000, Atlanta, GA 30363, USA) eingebettet. Wenn du über dieses Widget einen Termin buchst, werden folgende Daten an Calendly übermittelt und dort verarbeitet:</p>
+    <p>• Name<br>• E-Mail-Adresse<br>• Gewählter Termin<br>• Ggf. weitere von dir eingegebene Angaben</p>
+    <p style="margin-top:0.5rem">Die Verarbeitung dieser Daten erfolgt zur Durchführung vorvertraglicher Maßnahmen bzw. zur Vertragserfüllung gemäß Art. 6 Abs. 1 lit. b DSGVO. Calendly LLC ist nach dem EU-US Data Privacy Framework zertifiziert. Weitere Informationen findest du in der Datenschutzerklärung von Calendly: <a href="https://calendly.com/privacy" target="_blank" rel="noopener">calendly.com/privacy</a>.</p>
+    <p>Bereits beim Laden der Seite mit eingebettetem Calendly-Widget wird eine Verbindung zu Calendly-Servern hergestellt und dabei deine IP-Adresse übermittelt. Rechtsgrundlage hierfür ist Art. 6 Abs. 1 lit. f DSGVO.</p>
   </div>
 
   <div class="block">
-    <h2>5. Cookies</h2>
-    <p>Diese Website verwendet keine Tracking-Cookies. Es werden keine Analyse- oder Werbe-Cookies eingesetzt.</p>
+    <h2>5. Kontakt per E-Mail</h2>
+    <p>Wenn du uns per E-Mail kontaktierst, werden die von dir übermittelten Daten (E-Mail-Adresse, Name, Nachrichteninhalt) bei uns gespeichert und verarbeitet, um deine Anfrage zu bearbeiten. Diese Daten geben wir nicht ohne deine Einwilligung weiter. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse). Die Daten werden gelöscht, sobald sie für den Zweck der Erhebung nicht mehr erforderlich sind, spätestens nach 3 Jahren.</p>
   </div>
 
   <div class="block">
-    <h2>6. Deine Rechte</h2>
-    <p>Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16 DSGVO), Löschung (Art. 17 DSGVO), Einschränkung der Verarbeitung (Art. 18 DSGVO) sowie Datenübertragbarkeit (Art. 20 DSGVO).</p>
-    <p>Zur Ausübung deiner Rechte wende dich an: <span style="color:var(--gold)">khederaltnji@gmx.net</span></p>
+    <h2>6. Cookies</h2>
+    <p>Unsere Website selbst setzt keine eigenen Tracking- oder Analyse-Cookies. Es werden keine Werbe- oder Profilierungs-Cookies durch uns eingesetzt.</p>
+    <p>Hinweis: Das eingebettete Calendly-Widget kann technisch notwendige Cookies setzen, um die Buchungsfunktion zu gewährleisten. Diese unterliegen der Datenschutzerklärung von Calendly.</p>
   </div>
 
   <div class="block">
-    <h2>7. Beschwerderecht</h2>
-    <p>Du hast das Recht, dich bei einer Datenschutzaufsichtsbehörde zu beschweren. Die zuständige Aufsichtsbehörde richtet sich nach deinem Bundesland.</p>
+    <h2>7. Externe Links & Drittdienste</h2>
+    <p>Unsere Website enthält Links zu externen Diensten (LinkedIn u. a.). Beim Klick auf diese Links werden Daten (insbesondere deine IP-Adresse) an die jeweiligen Anbieter übermittelt. Wir haben keinen Einfluss auf die Datenverarbeitung durch diese Drittanbieter und verweisen auf deren Datenschutzerklärungen.</p>
   </div>
 
   <div class="block">
-    <h2>8. Aktualität</h2>
-    <p>Stand: April 2026. Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf zu aktualisieren.</p>
+    <h2>8. SSL-Verschlüsselung</h2>
+    <p>Diese Website nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennst du daran, dass die Adresszeile des Browsers von „http://" auf „https://" wechselt und an dem Schloss-Symbol in der Browserzeile.</p>
+  </div>
+
+  <div class="block">
+    <h2>9. Deine Rechte als betroffene Person</h2>
+    <p>Du hast gegenüber uns folgende Rechte hinsichtlich der dich betreffenden personenbezogenen Daten:</p>
+    <p>• <strong style="color:var(--white)">Auskunft</strong> (Art. 15 DSGVO)<br>
+    • <strong style="color:var(--white)">Berichtigung</strong> (Art. 16 DSGVO)<br>
+    • <strong style="color:var(--white)">Löschung</strong> (Art. 17 DSGVO)<br>
+    • <strong style="color:var(--white)">Einschränkung der Verarbeitung</strong> (Art. 18 DSGVO)<br>
+    • <strong style="color:var(--white)">Datenübertragbarkeit</strong> (Art. 20 DSGVO)<br>
+    • <strong style="color:var(--white)">Widerspruch gegen die Verarbeitung</strong> (Art. 21 DSGVO)</p>
+    <p style="margin-top:0.5rem">Zur Ausübung deiner Rechte wende dich an: <a href="mailto:khederaltnji@gmx.net">khederaltnji@gmx.net</a></p>
+  </div>
+
+  <div class="block">
+    <h2>10. Beschwerderecht bei der Aufsichtsbehörde</h2>
+    <p>Du hast das Recht, dich bei einer Datenschutzaufsichtsbehörde über die Verarbeitung deiner personenbezogenen Daten durch uns zu beschweren. Die zuständige Aufsichtsbehörde für Nordrhein-Westfalen ist:</p>
+    <p><strong style="color:var(--white)">Landesbeauftragte für Datenschutz und Informationsfreiheit NRW</strong><br>
+    Kavalleriestraße 2–4<br>
+    40213 Düsseldorf<br>
+    <a href="https://www.ldi.nrw.de" target="_blank" rel="noopener">www.ldi.nrw.de</a></p>
+  </div>
+
+  <div class="block">
+    <h2>11. Aktualität dieser Erklärung</h2>
+    <p>Stand: April 2026. Wir behalten uns vor, diese Datenschutzerklärung bei Bedarf zu aktualisieren, um sie an geänderte Rechtslagen oder bei Änderungen des Dienstes anzupassen.</p>
   </div>
 </main>
 
 <footer>
-  <p>© 2026 Kidscales
+  <p>© 2026 Kidscales Media
     <a href="impressum.html">Impressum</a>
     <a href="datenschutz.html">Datenschutz</a>
   </p>
