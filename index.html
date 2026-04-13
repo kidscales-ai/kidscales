@@ -622,6 +622,10 @@
       .hero-stats { flex-direction: column; align-items: center; gap: 1.2rem; }
     }
   </style>
+  <!-- Wistia Player -->
+  <script src="https://fast.wistia.com/player.js" async></script>
+  <script src="https://fast.wistia.com/embed/2ivwbi48q2.js" async type="module"></script>
+  <style>wistia-player[media-id='2ivwbi48q2']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/2ivwbi48q2/swatch'); display: block; filter: blur(5px); }</style>
 </head>
 <body>
 
@@ -668,12 +672,9 @@
       <p>Wir schalten profitabel Paid Ads auf Meta, TikTok und Google — und bringen E-Commerce Brands auf das nächste Umsatzniveau.</p>
     </div>
 
-    <!-- VSL Placeholder -->
+    <!-- VSL Video -->
     <div class="hero-vsl">
-      <div class="vsl-placeholder">
-        <div class="vsl-placeholder-icon">▶</div>
-        <div class="vsl-placeholder-text">Dein VSL Video</div>
-      </div>
+      <wistia-player media-id="2ivwbi48q2" aspect="1.0" style="width:100%;height:100%;"></wistia-player>
     </div>
 
     <!-- CTA unter Video -->
