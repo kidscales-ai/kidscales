@@ -2,12 +2,12 @@
 <html lang="de">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10802714697"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18082714697"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'AW-10802714697');
+    gtag('config', 'AW-18082714697');
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1215,5 +1215,14 @@
   });
 </script>
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+
+<!-- Calendly Conversion Tracking -->
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data.event && e.data.event === 'calendly.event_scheduled') {
+      gtag('event', 'conversion', {'send_to': 'AW-18082714697/dKCrCMGTkpscEMmowa5D'});
+    }
+  });
+</script>
 </body>
 </html>
